@@ -3,7 +3,10 @@
 A WhatsApp bot built on [Baileys](https://github.com/WhiskeySockets/Baileys). It does three things:
 
 - **Sends approved messages.** The web app's Send button reaches the bot's outbox (`outbox.js`, `127.0.0.1:8788`) through the server. The outbox sends only to `OUTBOX_ALLOWED`, or else to the `ALLOWED` list.
-- **Answers replies with the AI.** `ai.js` uses `gpt-5-mini` through the hackathon proxy, with only the facts of that family's plan and the last message the advisor sent. `contexto.js` remembers which family each chat is about.
+- **Answers replies as the family's advisor.** `ai.js` uses `gpt-5-mini` through the hackathon proxy. `contexto.js` remembers which family each chat is about.
+  - **The master prompt** is in [`prompts/advisor-system.md`](prompts/advisor-system.md). It sets the identity and the protocols: purchase traffic light, market drops, tax changes, proactive check-ins, numerical precision and WhatsApp format. Edit it there. It is re-read on every reply, so no restart is needed.
+  - **Filling the prompt:** `prompt.js` fills its placeholders with that family's case files from `cases/<id>/`: `persona.md`, the financial-health and investment-analysis fields the prompt refers to, `legal-values.json` and `signals.json`. It also adds today's date, the reply language and the last message the advisor sent.
+  - **Size, speed and cost:** about 75–90k characters of context per reply. Replies take 15–20 s and cost under one cent each.
 - **Lets you send from the terminal.** Type `34600111222 message` and press Enter.
 
 ## Run it
