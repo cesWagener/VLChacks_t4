@@ -51,7 +51,12 @@ On a family's page, once the advisor approves the message, **Send via WhatsApp**
 
 - **Recipient:** always `WHATSAPP_DEMO_TO` from `.env`. The four families are fictional, so messages go to the team's demo phone, never to a real client. The bot double-checks this: it only sends to numbers in `OUTBOX_ALLOWED`, or else in its `ALLOWED` list.
 - **Shared secret:** the API and the bot must have the same `OUTBOX_SECRET` in their `.env`. Without it, the outbox stays off.
-- **Bot on another laptop:** the bot listens on port 8788 of the laptop it runs on. On the laptop running the API, set `OUTBOX_URL=http://<bot-laptop-ip>:8788` (same Wi-Fi). Run `ipconfig` on Windows or `ipconfig getifaddr en0` on macOS to find the IP.
+- **Bot on another laptop:** the bot listens on port 8788 of its own laptop. Guest and event Wi-Fi usually block laptops from reaching each other, so the bot's laptop opens a free tunnel, with no account needed:
+  ```bash
+  winget install --id Cloudflare.cloudflared      # once (macOS: brew install cloudflared)
+  cloudflared tunnel --url http://localhost:8788  # prints https://<random>.trycloudflare.com
+  ```
+  Put that address in `OUTBOX_URL` in the `.env` of the laptop running the API. The API re-reads it on every send, so no restart is needed. The address changes each time the tunnel restarts. On a network where laptops can reach each other, `OUTBOX_URL=http://<bot-laptop-ip>:8788` also works; the bot prints that line when it starts.
 - **Check it:** run `npm run api:check`. Check 5 reports whether the bot is reachable and logged in to WhatsApp.
 
 ## Limits
