@@ -1,0 +1,644 @@
+{
+  "id": "daniel-emily-johnson",
+  "displayName": "Daniel & Emily Johnson",
+  "adults": [
+    "Daniel",
+    "Emily"
+  ],
+  "household": [
+    {
+      "firstName": "Daniel",
+      "role": "client",
+      "age": 44,
+      "retirementAge": 62,
+      "riskProfile": "Growth"
+    },
+    {
+      "firstName": "Emily",
+      "role": "co-client",
+      "age": 42,
+      "retirementAge": 60,
+      "riskProfile": "Moderate"
+    },
+    {
+      "firstName": "Oliver",
+      "role": "child",
+      "age": 11
+    },
+    {
+      "firstName": "Sophia",
+      "role": "child",
+      "age": 9
+    }
+  ],
+  "city": "Denver",
+  "state": "CO",
+  "planUrl": "https://app.sherpaswealth.com/plan/shared/FjVPq_UEwSMxaye8aOWj3osJWWSE3cDnYWcxm1X7I78",
+  "score": {
+    "value": 52,
+    "band": "vulnerable",
+    "colour": "red",
+    "message": "With a score of 52, your financial health is below average, affecting not just your financial life but your overall well-being. Let's work together to take immediate steps toward organizing and clarifying your financial situation. Let me help you take control of your finances and improve the quality of your life.",
+    "pillars": [
+      {
+        "pillar": "Savings and cash flow",
+        "points": "16/30"
+      },
+      {
+        "pillar": "Debt",
+        "points": "15/20"
+      },
+      {
+        "pillar": "Investments",
+        "points": "8/15"
+      },
+      {
+        "pillar": "Liquidity and emergency fund",
+        "points": "13/15"
+      },
+      {
+        "pillar": "Insurance and protection",
+        "points": "0/20"
+      }
+    ],
+    "topMoves": [
+      {
+        "title": "Raise mortality coverage",
+        "action": "Add $1,166,000 of life cover to reach the next mortality-coverage anchor",
+        "scoreBefore": 52,
+        "scoreAfter": 57
+      },
+      {
+        "title": "Add umbrella cover",
+        "action": "Add $1M of umbrella to raise the liability shield",
+        "scoreBefore": 52,
+        "scoreAfter": 56
+      },
+      {
+        "title": "Raise annual savings",
+        "action": "Redirect $15,032/year of free cash flow into savings to raise retirement-directed savings toward the next band",
+        "scoreBefore": 52,
+        "scoreAfter": 55
+      }
+    ]
+  },
+  "goalsSummary": [
+    "Both Daniel and Emily want to retire in 2044 at ages 62 and 60.",
+    "Going on a $4,500 vacation every year.",
+    "Finance education for 2 children ($60,000 in total for each child)."
+  ],
+  "goals": [
+    {
+      "name": "Take a vacation",
+      "type": "VACATION",
+      "date": "2027-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "College Oliver",
+      "type": "COLLEGE",
+      "date": "2033-08-01T00:00:00.000Z"
+    },
+    {
+      "name": "College Sophia",
+      "type": "COLLEGE",
+      "date": "2035-08-01T00:00:00.000Z"
+    },
+    {
+      "name": "Emily's Retirement",
+      "type": "RETIREMENT",
+      "date": "2044-05-01T00:00:00.000Z"
+    },
+    {
+      "name": "Daniel's Retirement",
+      "type": "RETIREMENT",
+      "date": "2044-09-01T00:00:00.000Z"
+    }
+  ],
+  "narrative": {
+    "summary_main": "- You have a solid base to work from. Two salaries bring in $280,000 a year, your net worth is $511,000, and you have $330,000 in investable assets. Your home is about two-thirds of your assets, but only $190,000 of it is equity against a $560,000 mortgage. Bills are being met, and about $15,032 a year is left over after your outflows.\n- The central tension is that several needs draw on that same $15,032: retirement saving, a larger cash reserve, protection cover and college funding. Nothing here ranks them, so it is a tradeoff for the two of you to weigh together, calmly and without blame.\n- Retirement is the largest gap. Nothing is going into your two 401(k)s today, and each of you could contribute up to $24,500 a year. Closing the gap would take about $34,165 more a year, which is more than twice your free cash flow. As a projection to age 91, income covers about 49% of a $124,071 yearly need, savings pay about $62,932 a year, and your savings last with about $260,272 left at the end.\n- Your cushion and your family's protection are thinner than they could be. Accessible cash of $19,000 is about $92,360 short of the cash target once your near-term vacation goal is included. Life cover is $250,000 for Daniel and $200,000 for Emily, well below the recommended ranges. There is no umbrella policy, against a recommended $1,000,000.\n- You do have strengths to build on. Your debt payments are manageable, with housing and debt together about 27% of income. The 529 holds $30,000 with $8,000 going in each year, though a $106,552 college funding gap remains. The $18,000 card at 24.9% is on track to be cleared by January 2034 at current payments.\n- A realistic direction is to decide together how the $15,032 is shared among the cash reserve, life and umbrella cover, retirement contributions and the 529. Checking whether your employers offer a 401(k) match is a good first look, since none is recorded today.",
+    "summary_recommendations": "- Start by strengthening your protection, since it matters most to you: review life cover for both of you, which sits well below the recommended ranges, and look at adding umbrella liability cover, since none is in place today.\n- Build your cash reserve toward the recommended 8 to 9 months of essential expenses, because accessible cash currently covers only a small fraction of that.\n- Raise your retirement saving, which is currently $0 in contributions, and confirm with each employer whether a match exists so you know what your deferrals could earn.\n- Treat the 24.9% credit card as the costliest debt, and look at whether a higher monthly payment fits alongside your other goals.\n- Talk through together how protection, cash, retirement and the 529 compete for the same yearly free cash flow, so that the trade-offs are a shared choice rather than a default.",
+    "retirement_short_observations": "- Your plan projects that your money lasts to age 91, with $260,272 of savings left in today's dollars. That is a projection over the plan horizon, not a certainty, and it depends on savings covering about half of your retirement spending.\n- Income is projected to cover 49% of your $124,071 yearly retirement spending need, and Social Security supplies nearly all of it. The rest, about $62,932 a year on average, would come from savings, so what you build before retiring matters a great deal.\n- Drawing an average of 5.5% of your savings at the start of retirement is a meaningful pace. It holds through age 91 in the projection, but the cushion at the end is modest, and no long-term care cost is included.\n- Nothing is going into retirement contributions today. You could each contribute up to $24,500 a year to a 401(k), and each of you currently contributes $0. Whether an employer match is available isn't confirmed.\n- Emily plans to stop work at 60 and Daniel at 62, and your risk comfort differs (Daniel Growth, Emily Moderate). Since the plan leans on savings, it is worth checking that reliance against each of your comfort levels.",
+    "retirement_what_to_look_into": "**We should look into**: how retirement saving and the emergency reserve could share your limited cash flow, and confirming any employer match.",
+    "assets_short_observations": "- Most of your wealth sits in your home: $750,000 of your $1,129,000 in total assets, or 66.4%. Only $190,000 of that is yours after the mortgage, so the home is 37.2% of your net worth, while your $330,000 of invested savings are 64.6%. Your net worth rests more on investments than on the house, and home equity is harder to use for emergencies or retirement.\n- You hold $14,000 in cash, just 1.2% of your total assets. About $6,000 a year goes into cash and $12,000 a year into your brokerage account, so your current saving is going to cash and taxable savings. The cash cushion is the thinnest part of the picture, while the invested savings give you a steadier base.\n- Your $560,000 mortgage against the $750,000 home leaves 25.3% equity. That is above the 20% level and below the 50% level, so you own a modest share of the home and still owe about three-quarters of its value.\n- Your two 401(k)s hold $250,000 combined ($150,000 Daniel, $100,000 Emily), but nothing is going into them each year. Your invested savings are 60.2% in stocks against an 80.0% target, so they are currently less stock-heavy than that target.",
+    "assets_what_to_look_into": "**We should look into**: starting regular contributions to the two 401(k)s, how the 529 college plan's yearly funding compares with its target, and an HSA, plus whether each employer offers a match, which is the data to confirm.",
+    "debt_short_observations": "- Your debt is large but manageable: $618,000 in total, or 220.7% of your gross income, with $560,000 of it in the mortgage at 6.5%. Debt payments take 23.2% of your income, and housing-related obligations are 27.2%. That is below the 36%, 43% and 50% levels lenders commonly use, so this is a heavy load rather than a crisis.\n- Your home equity is $190,000, or 25.3% of the home's value. That is only modestly above the 20% mark, so it is a cushion but not a large one.\n- The $18,000 card at 24.9% is your most expensive debt by a wide margin. At $450 a month it is projected to be paid off in January 2034, about 7 years out. That is a projection and assumes the payment stays the same.\n- Your accessible cash of $19,000 covers about 1.4 months of essential expenses, far below the $106,860 to $120,217.50 (8 to 9 months) that would be a full reserve. Thin cash matters because an unexpected cost would have to be met from limited savings, or could land on the high-rate card.\n- Your annual cash flow is $15,032, and the card, the cash reserve and your other goals all compete for it. The card's rate costs the most per dollar owed, while the $87,860 gap to the minimum reserve is the larger shortfall in dollars. Both matter, and the data does not settle which should come first.",
+    "debt_what_to_look_into": "**We should look into**: how the mortgage payment fits alongside the emergency reserve and retirement saving, and when the 24.9% credit card will be paid off, currently January 2034 at current payments.",
+    "savings_short_observations": "- You have about $15,032 a year (5.4% of income) left after taxes, housing, debt payments, expenses and current savings. That is a thin cushion, and every savings goal has to draw on it.\n- Your emergency cash of $19,000 covers about 1.4 months of essential spending, against a recommended 8 to 9 months. The $87,860 shortfall to the minimum matters because a surprise would test this cushion first.\n- Nothing is going into retirement accounts today, and about $34,165 a year of extra saving is called for. Projections show a retirement gap of $1,427,456 at your target retirement ages.\n- That extra retirement saving is more than double your $15,032 of yearly cash flow, so the retirement gap can't be closed from today's cash flow alone.\n- Your current savings go to the 529 ($8,000 a year) and a taxable account ($12,000 a year), and education would still need about $1,928 a year more, rising each year. Retirement is the largest long-term figure, while emergency cash is the nearest protection, so the balance among the three is a tradeoff to work through.",
+    "savings_what_to_look_into": "**We should look into**: building up the emergency cash reserve, directing more saving toward retirement, and confirming whether a workplace match applies.",
+    "protection_intro": "Protection keeps one bad event from undoing the rest of your plan, and the question is whether your cash, life insurance and liability cover would hold up if a paycheck stopped or a claim arrived. The sections below look at your emergency fund, life insurance and umbrella cover in turn, and each shows a meaningful gap that can be closed in steps.",
+    "protection_emergency_fund_short_observations": "- Your accessible cash of $19,000 covers about 1.4 months of essential expenses, against a recommended 8 to 9 months for your household ($106,860 to $120,218). That leaves a shortfall of $87,860, which grows to $92,360 once the $4,500 vacation payment is set aside, and cover then drops to 1.1 months. With two incomes at risk ($160,000 and $120,000) and two children, this cushion is what you would lean on first if a paycheck were interrupted.\n- One thing working in your favor: you hold $5,000 in money market alongside your bank cash, and you have no excess cash sitting idle.",
+    "protection_life_insurance_short_observations": "- Daniel has $250,000 of life insurance against a recommended $1,600,000 to $2,400,000, a shortfall of $1,350,000. Emily has $200,000 against $1,200,000 to $1,800,000, a shortfall of $1,000,000. You both hold some cover and neither of you is over-covered, but the gaps are large for a household with two children, a mortgage and college costs ahead.\n- Your household relies on both paychecks: $160,000 from Daniel and $120,000 from Emily. If either income were lost, the remaining one would have to carry the household's costs.\n- Obligations that would remain include a $560,000 mortgage, a vehicle loan, a student loan and an $18,000 credit card balance. College costs of $120,000 for Oliver and Sophia are also ahead, and the funding gap after current 529 balances is $107,000 (rounded).",
+    "protection_umbrella_short_observations": "- You have no umbrella policy, and the recommended minimum is $1,000,000, so that whole amount is currently uncovered. An umbrella adds liability protection above home and auto cover, which matters because one large claim could otherwise reach your savings and future earnings.\n- A claim could reach your home and vehicle, worth $785,000 with $197,000 of equity, and also the $344,000 you hold in liquid assets. Against a net worth of $511,000, an uncovered claim could be significant for your household.\n- Your home and your Toyota Highlander are both flagged as not insured in the data. That may only reflect missing detail, since nothing further is held on other property cover. Confirming what home and auto cover you already have would clarify what an umbrella would sit on top of.\n- Your two incomes ($160,000 and $120,000) are part of what a claim could put at risk, not only your assets. With two children at home, that adds weight to the missing layer. No cost for umbrella cover is available, so what it would take to close the gap is unknown."
+  },
+  "investmentNarrative": {
+    "summary_main": "- **Your portfolio's job** — Your portfolio is meant to fund a comfortable retirement. The biggest gap is retirement: the projected shortfall is $1,427,456 in today's dollars, and closing it would take about $34,165 a year of additional savings. Savings left at the end of the plan are $260,272.\n\n- **Your numbers in plain English** — Retirement spending needs about $124,071 a year, and the plan leaves $62,932 a year for savings to cover. Your strengths are earned income and positive free cash flow of $15,032 a year. Non-mortgage debt payments are $15,840 a year; total debt payments, including the mortgage, are $65,040 a year, and debt-only DTI is 23.2%.\n\n- **Where to start** — Savings and cash compete for the same $15,032 a year, so take them in steps. Retirement saving is the largest need, at $34,165 a year. Rebuilding cash matters too: accessible cash is $92,360 short of a $111,360 to $124,717.50 target. Protection is covered elsewhere in this report.\n\n- **One caveat** — Free cash flow of $15,032 a year leaves a thin margin against these needs, so treat savings amounts as a starting point to confirm together. Long-term care is not planned for.\n\n- **Worth watching** — Annual salary is 54.79% of your net worth, so your household leans heavily on earned income. Keep this in view, with no action now.",
+    "snapshot_main": "Your household's net worth is $511,000, which includes your home and cash as well as your investments. Both of you earn salaries; income is a large part of your overall wealth and the cash on hand is small next to what a reserve would call for.",
+    "portfolio_today_intro": "The central tension is that your household's wealth leans heavily on two salaries, while the cushions that would protect that income are still thin. Savings, reserves and protection all draw on the same limited yearly cash flow, so the portfolio is being asked to do more than it can yet do on its own. The sections that follow weigh the portfolio in that light: what it needs to do for your family, and what it is actually doing today.",
+    "portfolio_today_what_it_needs_to_do": "- **Retirement income** — The plan shows a retirement shortfall of $1,427,456 in today's dollars, and closing it would take about $34,165 a year of additional saving. Your two 401(k)s hold $250,000 and are the main pool for this long-term job. Neither you nor Emily is contributing to them today; each of you could contribute up to $24,500 a year. Daniel plans to retire at 62 and Emily at 60.\n- **Safety cushion** — Your accessible cash is $19,000, which covers about 1.4 months of essential spending. The cash target is $111,360 to $124,718 (8 to 9 months of essentials plus the $4,500 vacation due in January 2027), so the gap is $92,360. This money protects the family from a job or medical shock so long-term investments don't have to be sold at a bad time. Closing the gap will take time, because it draws on the same $15,032 of yearly free cash flow as your other goals.\n- **College funding** — The 529 holds $30,000 and receives $8,000 a year. A college funding gap of $106,552 remains. Its job is to cover education costs, so it is kept separate from your retirement and reserve money.\n- **Flexible savings** — The taxable brokerage account holds $50,000, including $5,000 of cash that counts toward your reserve. No specific purpose is defined for the rest, so it is treated as flexible money until you decide what it is for.",
+    "portfolio_today_what_its_actually_doing": "- **Income-dependent wealth** — Your two salaries total $280,000, which is 54.79% of your $511,000 net worth. Your position leans on continued earnings more than on assets that can stand alone, so a pause in either paycheck would reach your plans quickly. No employer stock is identifiable, and unvested equity is $0.\n- **Thin cushion** — Accessible cash is $19,000, about 1.4 months of essential expenses, against a target of $111,360 to $124,717.50. That leaves a $92,360 gap. A job loss or medical bill would therefore be more likely to force sales of investments, possibly at a poor moment.\n- **Steady results, concentrated equity** — Your portfolio returned 13.7% a year over three years with volatility of 8.1%, close to a diversified portfolio at the same equity level. Technology is 35.6% of your stock holdings and the United States 88.6%. You hold no single stocks, but your equity funds are likely to move together.\n- **Savings squeezed by competing needs** — You have $15,032 a year of free cash flow, while closing the retirement gap of $1,427,456 would take $34,165 a year more. Nothing is going into either 401(k), and an $18,000 card at 24.9% also competes. Because the cash gap draws on the same dollars, no single need can be fully funded.",
+    "portfolio_today_performance_timeline": "Over the three years to November 2026, your portfolio grew an average of 13.7% a year. Its swings were modest: the worst fall from a peak was 10.0%, and it recovered from that in 61 days. A diversified portfolio holding the same share of stocks returned 14.6% a year with a worst fall of 10.6%, so your result was close, a little lower in return and a little smoother along the way. The return you earned for each unit of risk taken was 1.24, against 1.28 for that comparison, which is a small difference.\n\nThe most meaningful behavior shows up in the tariff-related market events. When tariffs were announced on 2 April 2025, your portfolio fell 8.1% while the comparison fell 7.8%, so it fell about as much. When a pause was announced on 9 April 2025, your portfolio fell 2.3% against 3.1%, holding up better. Across the whole period your portfolio took part in about 87% of the market's gains and about 97% of its losses. In plain terms, it gave up more of the upside than it saved on the downside, though the paths stayed close throughout.\n\nThe evidence is limited to one three-year window and a few dated events, so a different period or a new market event could change the reading. A mix with more stocks, the kind your long-term goals are measured against, returned 17.6% a year over the same window, with a worst fall of 12.8%. That shows a more stock-heavy mix earned more in this period, with deeper falls. It describes how the mixes differ, not a sign that your portfolio did anything wrong.",
+    "portfolio_today_whats_working": "- **Positive cash flow** — You have $15,032 a year of free cash flow after expenses, debt payments and current savings. Your two incomes cover what you owe and leave a margin you can direct toward goals, even though it is thinner than the retirement and cash targets require.\n- **Debt payments** — Your debt-only DTI is 23.2%, within the levels lenders commonly use.\n- **Manageable housing cost** — Your housing-obligations ratio is 27.2%. Housing costs share your income with other needs, including savings and building the cash reserve.\n- **No single-stock risk** — You hold 0 individual stocks, and no two holdings in the same account duplicate each other. Technology, at 35.6% of your stock holdings, comes from funds, and Financial Services is next at 12.1%. No single company drives your investment results.\n- **Steady three-year results** — Your portfolio returned 13.7% annualized over three years, with volatility of 8.1% and a Sharpe of 1.24. A diversified portfolio with the same overall equity allocation delivered 14.6%, 8.6% and 1.28. Your worst drop was 9.97%, recovered in 61 days.",
+    "portfolio_today_priorities": "- **Cash reserve** — Accessible cash is $19,000, about 1.4 months of essential spending, against a minimum target of $111,360, a gap of $92,360. A job loss or medical event could force you to sell long-term investments, so this cushion needs to grow as cash flow allows.\n- **Retirement savings** — The plan shows a retirement gap of $1,427,456, and closing it would take about $34,165 a year of added saving. Nothing goes into either 401(k) today, and Daniel and Emily could each contribute up to $24,500. Free cash flow is $15,032, so this shortfall needs steady, long-term attention.\n- **Income dependence** — Your $280,000 of salaries equals 54.79% of your $511,000 net worth, so your finances rest heavily on two paychecks. Reserves and protection need to strengthen so a pause in either income does not reach your long-term plans. The same limited cash flow serves all of these needs.",
+    "portfolio_today_verdict": "Your two traditional 401(k)s are performing well, with Daniel's returning 15.8% and Emily's 13.5% annualized over three years, and the bonds held inside them sit in the right kind of account for their tax treatment. The weak point is that nothing is going into either plan: $0 is contributed, although you and Emily could each contribute up to $24,500 a year, traditional and Roth together. Without a change, the projected retirement gap is $1,427,456 in today's dollars, savings left at the end of the plan are $260,272, and closing the gap would take about $34,165 more savings a year. Your savings capacity is $15,032 a year, but it is still well short of that, and your cash reserve, the 529 and the 24.9% credit card compete for the same dollars. Contributing to these tax-deferred plans could lower your tax by about $11,760 a year, and estimated employer contributions of $6,400 and $4,800 are not being captured, though the match formulas are not in the data, so treat those amounts as unconfirmed. Agreeing a clear contribution path now, with the order of your savings decided alongside rebuilding your cash reserve, is the most important step you can take.",
+    "portfolio_today_also_meaningful": "An HSA is a secondary item for you, well behind retirement saving and the emergency reserve, so it can wait until those larger priorities are settled. You have no HSA today and have contributed $0. Whether your health plan qualifies is not in the data, so the first step is to confirm eligibility. If your plan qualifies, you could contribute up to $8,750, and at your 24% marginal tax rate that would lower your tax by about $2,100 a year. It would also give you a dedicated place to set money aside for health costs. That benefit applies only if the plan qualifies. The data holds no HSA balance, no HSA investments and no tax-drag findings for an HSA, so nothing more can be said about the account yet. Tax-loss harvesting does not apply to an HSA, because a loss inside it gives no tax deduction.",
+    "recommendations_main": "- **Protect your income with life cover** — The target is about $1,616,000 of added coverage, worth 5 points on your Financial Health score of 52. Please treat this as an amount to confirm against current policies, not an exact shortfall. It protects the family's income and home if one of you were lost.\n- **Add umbrella liability cover** — No umbrella cover is evident, and $1,000,000 is the recommended amount, worth 4 points of score. It guards your savings and home against a large liability claim. Together with life cover, these two steps are worth 8 points.\n- **Rebuild your cash reserve** — Your accessible cash is about $19,000, which leaves a gap of $92,360 against a total cash target of $111,360 to $124,717.50. Without it, a job loss or large bill could force you to sell investments at a poor time. Closing it will take time, so steady progress as cash flow allows is a sound goal.\n- **Build retirement savings in steps** — The projected retirement gap is $1,427,456, and closing it would take about $34,165 a year of added savings. Your free cash flow is $15,032 a year, so the need is larger than today's margin. Please confirm whether either employer offers a match, since that could make each dollar go further.\n- **Use your yearly margin deliberately** — Protection, the reserve and retirement all compete for the same $15,032 a year. Non-mortgage debt payments are $15,840 a year; total debt payments, including the mortgage, are $65,040 a year, or 23.2% of income. Raising annual savings alone would lift your score from 52 to 55. We suggest weighing these needs together, taking small, clear steps rather than all at once.\n- **Keep income dependence in view** — Your salaries equal 54.79% of your net worth, so the household leans heavily on earned income. That is another reason protection matters. Safeguarding your ability to earn supports every other goal here.",
+    "recommendations_scenarios": "- **Steady through the last three years** — Your portfolio earned about 13.7% a year over the past three years. Its worst drop was about 10.0%, and it recovered in 61 days. That is a little smoother than a diversified portfolio with the same overall stock share, which earned about 14.6% a year. These are past results, not a promise about what comes next.\n- **Held up better in two of the three tariff shocks** — When the 90-day tariff pause was announced in April 2025, your portfolio fell 2.3% while the comparison fell 3.1%. When the Supreme Court struck down the tariffs in February 2026, you fell 0.8% against 1.2%. In both, you lost less than the comparison.\n- **The sharpest fall was about the same as the comparison** — When the tariffs were first announced in early April 2025, your portfolio fell 8.1% against 7.8% for the comparison. That is slightly deeper, but very close. Across these three events, your portfolio behaved much like a diversified portfolio of similar risk. These events are history and don't tell us how a future downturn will go."
+  },
+  "metrics": {
+    "incomes": [
+      {
+        "owner": "Daniel",
+        "yearly": 160000
+      },
+      {
+        "owner": "Emily",
+        "yearly": 120000
+      }
+    ],
+    "totalAssets": 1129000,
+    "netWorth": 511000,
+    "investable": 330000,
+    "totalDebt": 618000,
+    "monthlyDebtPayment": 5420,
+    "assets": [
+      {
+        "name": "Cash account",
+        "total": 14000,
+        "count": 2
+      },
+      {
+        "name": "Investment account",
+        "total": 330000,
+        "count": 4
+      },
+      {
+        "name": "Real estate",
+        "total": 750000,
+        "count": 1
+      },
+      {
+        "name": "Vehicle",
+        "total": 35000,
+        "count": 1
+      }
+    ],
+    "liabilities": [
+      {
+        "name": "Credit card",
+        "total": 18000,
+        "count": 1
+      },
+      {
+        "name": "Student loan",
+        "total": 12000,
+        "count": 1
+      },
+      {
+        "name": "Personal loan",
+        "total": 28000,
+        "count": 1
+      },
+      {
+        "name": "Real estate debt",
+        "total": 560000,
+        "count": 1
+      }
+    ],
+    "debtToIncome": 0.2323,
+    "housingRatio": 0.2159,
+    "cashflow": {
+      "inflow": 280000,
+      "outflows": [
+        {
+          "name": "Expenses",
+          "total": 84000,
+          "items": [
+            {
+              "name": "Living Expenses",
+              "total": 84000
+            }
+          ]
+        },
+        {
+          "name": "Taxes",
+          "total": 78677.99,
+          "items": [
+            {
+              "name": "Federal Income Tax",
+              "total": 44667.99
+            },
+            {
+              "name": "FICA tax",
+              "total": 21690
+            },
+            {
+              "name": "State Income Tax",
+              "total": 12320
+            }
+          ]
+        },
+        {
+          "name": "Housing Expenses",
+          "total": 60450,
+          "items": [
+            {
+              "name": "Mortgage",
+              "total": 49200
+            },
+            {
+              "name": "Property Taxes",
+              "total": 7500
+            },
+            {
+              "name": "Home Insurance",
+              "total": 3750
+            }
+          ]
+        },
+        {
+          "name": "Savings",
+          "total": 26000,
+          "items": [
+            {
+              "name": "Brokerage account savings",
+              "total": 12000
+            },
+            {
+              "name": "529 - College Savings Plan savings",
+              "total": 8000
+            },
+            {
+              "name": "Cash savings",
+              "total": 6000
+            }
+          ]
+        },
+        {
+          "name": "Debt Payments",
+          "total": 15840,
+          "items": [
+            {
+              "name": "Car loan payments",
+              "total": 7440
+            },
+            {
+              "name": "Credit card payments",
+              "total": 5400
+            },
+            {
+              "name": "Student loan payments",
+              "total": 3000
+            }
+          ]
+        }
+      ],
+      "free": 15032.01
+    },
+    "savings": {
+      "amount": 26000,
+      "ratio": 0.0929
+    },
+    "employerMatchMaximized": false,
+    "emergency": {
+      "cash": 19000,
+      "monthlyExpenses": 13357.5,
+      "minMonths": 8,
+      "maxMonths": 9,
+      "minAmount": 106860,
+      "maxAmount": 120217.5,
+      "shortfall": 87860,
+      "excess": 0
+    },
+    "life": {
+      "people": [
+        {
+          "name": "Daniel",
+          "current": 250000,
+          "minRec": 1600000,
+          "maxRec": 2400000,
+          "shortfall": 1350000
+        },
+        {
+          "name": "Emily",
+          "current": 200000,
+          "minRec": 1200000,
+          "maxRec": 1800000,
+          "shortfall": 1000000
+        }
+      ]
+    },
+    "umbrella": {
+      "has": false,
+      "amount": 0,
+      "recommended": 1000000
+    },
+    "retirement": {
+      "retirementAge": 62,
+      "endOfPlanAge": 91,
+      "runOutAge": null,
+      "gap": 1427455.89
+    },
+    "creditCard": {
+      "name": "Chase Sapphire",
+      "balance": 18000,
+      "rate": 0.249
+    },
+    "educationGap": 106552.38
+  },
+  "projections": [
+    {
+      "year": 2026,
+      "age": 44,
+      "netWorth": 522431
+    },
+    {
+      "year": 2027,
+      "age": 45,
+      "netWorth": 612940
+    },
+    {
+      "year": 2028,
+      "age": 46,
+      "netWorth": 710736
+    },
+    {
+      "year": 2029,
+      "age": 47,
+      "netWorth": 816300
+    },
+    {
+      "year": 2030,
+      "age": 48,
+      "netWorth": 930179
+    },
+    {
+      "year": 2031,
+      "age": 49,
+      "netWorth": 1045717
+    },
+    {
+      "year": 2032,
+      "age": 50,
+      "netWorth": 1167703
+    },
+    {
+      "year": 2033,
+      "age": 51,
+      "netWorth": 1281217
+    },
+    {
+      "year": 2034,
+      "age": 52,
+      "netWorth": 1399114
+    },
+    {
+      "year": 2035,
+      "age": 53,
+      "netWorth": 1501657
+    },
+    {
+      "year": 2036,
+      "age": 54,
+      "netWorth": 1609987
+    },
+    {
+      "year": 2037,
+      "age": 55,
+      "netWorth": 1750437
+    },
+    {
+      "year": 2038,
+      "age": 56,
+      "netWorth": 1900037
+    },
+    {
+      "year": 2039,
+      "age": 57,
+      "netWorth": 2083384
+    },
+    {
+      "year": 2040,
+      "age": 58,
+      "netWorth": 2279585
+    },
+    {
+      "year": 2041,
+      "age": 59,
+      "netWorth": 2489458
+    },
+    {
+      "year": 2042,
+      "age": 60,
+      "netWorth": 2714718
+    },
+    {
+      "year": 2043,
+      "age": 61,
+      "netWorth": 2955621
+    },
+    {
+      "year": 2044,
+      "age": 62,
+      "netWorth": 3111209
+    },
+    {
+      "year": 2045,
+      "age": 63,
+      "netWorth": 3094647
+    },
+    {
+      "year": 2046,
+      "age": 64,
+      "netWorth": 3068954
+    },
+    {
+      "year": 2047,
+      "age": 65,
+      "netWorth": 3030391
+    },
+    {
+      "year": 2048,
+      "age": 66,
+      "netWorth": 2959079
+    },
+    {
+      "year": 2049,
+      "age": 67,
+      "netWorth": 2878630
+    },
+    {
+      "year": 2050,
+      "age": 68,
+      "netWorth": 2833527
+    },
+    {
+      "year": 2051,
+      "age": 69,
+      "netWorth": 2830670
+    },
+    {
+      "year": 2052,
+      "age": 70,
+      "netWorth": 2851394
+    },
+    {
+      "year": 2053,
+      "age": 71,
+      "netWorth": 2869569
+    },
+    {
+      "year": 2054,
+      "age": 72,
+      "netWorth": 2882266
+    },
+    {
+      "year": 2055,
+      "age": 73,
+      "netWorth": 2888157
+    },
+    {
+      "year": 2056,
+      "age": 74,
+      "netWorth": 2887962
+    },
+    {
+      "year": 2057,
+      "age": 75,
+      "netWorth": 2905666
+    },
+    {
+      "year": 2058,
+      "age": 76,
+      "netWorth": 2939460
+    },
+    {
+      "year": 2059,
+      "age": 77,
+      "netWorth": 2976627
+    },
+    {
+      "year": 2060,
+      "age": 78,
+      "netWorth": 3017473
+    },
+    {
+      "year": 2061,
+      "age": 79,
+      "netWorth": 3062328
+    },
+    {
+      "year": 2062,
+      "age": 80,
+      "netWorth": 3111550
+    },
+    {
+      "year": 2063,
+      "age": 81,
+      "netWorth": 3165527
+    },
+    {
+      "year": 2064,
+      "age": 82,
+      "netWorth": 3224681
+    },
+    {
+      "year": 2065,
+      "age": 83,
+      "netWorth": 3289465
+    },
+    {
+      "year": 2066,
+      "age": 84,
+      "netWorth": 3360374
+    },
+    {
+      "year": 2067,
+      "age": 85,
+      "netWorth": 3437938
+    },
+    {
+      "year": 2068,
+      "age": 86,
+      "netWorth": 3522737
+    },
+    {
+      "year": 2069,
+      "age": 87,
+      "netWorth": 3615393
+    },
+    {
+      "year": 2070,
+      "age": 88,
+      "netWorth": 3716581
+    },
+    {
+      "year": 2071,
+      "age": 89,
+      "netWorth": 3827030
+    },
+    {
+      "year": 2072,
+      "age": 90,
+      "netWorth": 3947529
+    },
+    {
+      "year": 2073,
+      "age": null,
+      "netWorth": 4084580
+    },
+    {
+      "year": 2074,
+      "age": null,
+      "netWorth": 4252040
+    },
+    {
+      "year": 2075,
+      "age": null,
+      "netWorth": 4325892
+    }
+  ],
+  "persona": {
+    "concerns": [
+      {
+        "id": "O1",
+        "severity": "SIGNIFICANT",
+        "title": "Retirement"
+      },
+      {
+        "id": "O2",
+        "severity": "SIGNIFICANT",
+        "title": "Life insurance"
+      },
+      {
+        "id": "O3",
+        "severity": "MODERATE",
+        "title": "No umbrella cover"
+      },
+      {
+        "id": "O4",
+        "severity": "SIGNIFICANT",
+        "title": "Cash reserve"
+      },
+      {
+        "id": "O5",
+        "severity": "MODERATE",
+        "title": "Debt load and the 24.9% card"
+      },
+      {
+        "id": "O6",
+        "severity": "MINOR",
+        "title": "Income dependence"
+      },
+      {
+        "id": "O7",
+        "severity": "MODERATE",
+        "title": "Thin margin"
+      },
+      {
+        "id": "O8",
+        "severity": "MODERATE",
+        "title": "College funding"
+      }
+    ]
+  }
+}
