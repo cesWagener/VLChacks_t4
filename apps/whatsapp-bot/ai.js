@@ -8,7 +8,7 @@
 // Which family a chat is about comes from the last message the advisor sent from the web app (contexto.js).
 // Model: gpt-5-mini through the hackathon AI proxy. Keys come from the repo-root .env (TEAM_KEY, LLM_PROXY_URL).
 import "./env.js"; // loads the repo-root .env
-import { leerContexto } from "./contexto.js";
+import { buscarContexto } from "./contexto.js";
 import { buildSystemPrompt, caseExists } from "./prompt.js";
 
 const PROXY = (process.env.LLM_PROXY_URL || "https://llm-hackathon.sherpaswealth.com").replace(/\/+$/, "");
@@ -30,8 +30,18 @@ function paraWhatsApp(text) {
 }
 
 export async function responder({ jid, text, history }) {
-  const ctx = leerContexto(jid);
-  if (!caseExists(ctx?.clientId)) return SIN_CONTEXTO;
+  // Which family is this chat about? Its own link, else the latest message sent from the app
+  // (WhatsApp may reply from a different JID), else BOT_DEFAULT_CLIENT if set.
+  let { ctx, via } = buscarContexto(jid);
+  if (!ctx && caseExists(process.env.BOT_DEFAULT_CLIENT)) {
+    ctx = { clientId: process.env.BOT_DEFAULT_CLIENT, text: "" };
+    via = "BOT_DEFAULT_CLIENT";
+  }
+  if (!caseExists(ctx?.clientId)) {
+    console.log(`IA: sin familia para ${jid}: no se ha enviado ningún mensaje desde la web todavía (o pon BOT_DEFAULT_CLIENT en .env).`);
+    return SIN_CONTEXTO;
+  }
+  console.log(`IA: ${jid} -> ${ctx.clientId} (${via})`);
   if (!process.env.TEAM_KEY) throw new Error("TEAM_KEY falta en .env");
 
   const messages = [
