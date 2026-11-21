@@ -95,16 +95,7 @@ npm run serve          # builds the web app, starts the server and the WhatsApp 
 | AI | `gpt-5-mini` through the hackathon AI proxy, low reasoning effort (about 10 s per reply) |
 | Data | The four Sherpas cases in [`cases/`](cases/); legal values and signals included |
 
-## What is simulated
-
-- **The families are fictional** (the four supplied cases). Messages go only to the team's own test phones, never to real clients.
-- **The advisor** ("David") and the top navigation copy the Sherpas product video. Only **Clients** works.
-- **The AI replies to the family directly** for the demo. In production, as the brief asks, they would go to the advisor's approval queue first.
-- **Baileys is unofficial**, so WhatsApp can ban the number. A real product would use the WhatsApp Business Cloud API.
-- **The public address is a free Cloudflare quick tunnel.** It changes every time the tunnel restarts.
-
 ## Repository
-
 ```
 apps/web            advisor web app (Clients view, family pages, proposed messages)
 apps/api            server: web app + API, password, AI rewrite, WhatsApp hand-off
