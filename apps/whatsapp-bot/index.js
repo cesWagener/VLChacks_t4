@@ -42,6 +42,12 @@ const IGNORAR = new Set([
   "reactionMessage",
   "messageContextInfo",
   "stickerMessage", // stickers: sin respuesta (ni "I don't understand…" ni llamada a la IA)
+  // Fotos, vídeos y audios: sin respuesta, ni se descargan.
+  "imageMessage",
+  "videoMessage",
+  "ptvMessage", // vídeo-nota redonda
+  // Notas de voz: ignoradas salvo BOT_VOICE_NOTES=1 (entonces las contesta la API de voz, ver voice.js)
+  ...(process.env.BOT_VOICE_NOTES === "1" ? [] : ["audioMessage"]),
 ]);
 
 const MAX_HISTORIAL = 10; // mensajes recordados por contacto

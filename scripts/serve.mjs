@@ -56,7 +56,8 @@ const env = {
 // Voice notes (apps/voice-api): optional. Needs its packages, FFmpeg with libopus and MCP_TOKEN.
 // Private to this machine (127.0.0.1); the bot calls it with a secret generated here.
 const voicePort = process.env.VOICE_API_PORT || "8790";
-let voiceOn = process.env.SERVE_VOICE !== "0";
+// Off by default: the bot ignores audio. BOT_VOICE_NOTES=1 turns voice-note answers on.
+let voiceOn = process.env.BOT_VOICE_NOTES === "1" && process.env.SERVE_VOICE !== "0";
 if (voiceOn && !fs.existsSync(path.join(root, "apps/voice-api/node_modules"))) {
   console.warn("⚠ Voice notes off: run npm run setup to install apps/voice-api.");
   voiceOn = false;
