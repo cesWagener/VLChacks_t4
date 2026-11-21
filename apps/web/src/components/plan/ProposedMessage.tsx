@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PlanData } from "../../lib/plan.ts";
 import { TONES, draftMessage, type Tone } from "../../lib/message.ts";
+import { rewriteWithAI } from "../../lib/api.ts";
 
 const STORAGE_PREFIX = "sherpas.proposedMessage.v1.";
 
@@ -11,6 +12,7 @@ interface Saved {
   body: string;
   edited: boolean;
   approved: boolean;
+  aiWritten?: boolean;        // current text came from "Rewrite with AI"
 }
 
 function readSaved(id: string): Saved | null {
@@ -45,6 +47,8 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
   const [edited, setEdited] = useState(saved?.edited ?? false);
   const [approved, setApproved] = useState(saved?.approved ?? false);
   const [copied, setCopied] = useState(false);
+  const [aiWritten, setAiWritten] = useState(saved?.aiWritten ?? false);
+  const [ai, setAi] = useState<{ status: "idle" | "loading" | "error"; message?: string }>({ status: "idle" });
   const bodyRef = useRef<HTMLTextAreaElement>(null);
 
   // Options changed and the advisor hasn't hand-edited: follow the new draft.
@@ -53,9 +57,9 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
   }, [draft, edited]);
 
   useEffect(() => {
-    const s: Saved = { tone, issueKeys, subject, body, edited, approved };
+    const s: Saved = { tone, issueKeys, subject, body, edited, approved, aiWritten };
     try { localStorage.setItem(STORAGE_PREFIX + plan.id, JSON.stringify(s)); } catch { /* storage blocked */ }
-  }, [plan.id, tone, issueKeys, subject, body, edited, approved]);
+  }, [plan.id, tone, issueKeys, subject, body, edited, approved, aiWritten]);
 
   // Grow the textarea with its content so the whole message is readable without inner scrolling.
   useEffect(() => {
@@ -63,13 +67,27 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
     if (el) { el.style.height = "auto"; el.style.height = `${el.scrollHeight + 2}px`; }
   }, [body]);
 
-  const regenerate = () => { setEdited(false); setApproved(false); setSubject(draft.subject); setBody(draft.body); };
-  const onEdit = (fn: () => void) => { fn(); setEdited(true); setApproved(false); };
+  const regenerate = () => { setEdited(false); setAiWritten(false); setApproved(false); setSubject(draft.subject); setBody(draft.body); };
+  const onEdit = (fn: () => void) => { fn(); setEdited(true); setAiWritten(false); setApproved(false); };
+  // Rewrites the current draft with the AI (through our backend). Same tone and topics; facts come from the plan.
+  const rewrite = async () => {
+    if (edited && !aiWritten && !window.confirm("Replace your edits with an AI rewrite?")) return;
+    setAi({ status: "loading" });
+    try {
+      const r = await rewriteWithAI({ clientId: plan.id, tone: tone ?? undefined, issueKeys: issueKeys ?? undefined });
+      setSubject(r.subject); setBody(r.body);
+      setEdited(true); setAiWritten(true); setApproved(false);
+      setAi({ status: "idle" });
+    } catch (e) {
+      setAi({ status: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  };
   // Changing the tone or topics rewrites the draft; hand edits are kept only if the advisor says so.
   const changeOptions = (apply: () => void) => {
     if (edited && !window.confirm("Replace your edits with a new draft?")) return;
     apply();
     setEdited(false);
+    setAiWritten(false);
     setApproved(false);
   };
   const toggleIssue = (key: string, on: boolean) => changeOptions(() => {
@@ -96,7 +114,7 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
         </div>
         <div className="proposal__status">
           <span className={`tone-pill tone-pill--${draft.tone}`}>{TONES.find(t => t.id === draft.tone)!.label.replace(/\s*\(.*\)$/, "")} tone</span>
-          <span className="status-pill" data-approved={approved || undefined}>{approved ? "Approved" : edited ? "Edited draft" : "Draft"}</span>
+          <span className="status-pill" data-approved={approved || undefined}>{approved ? "Approved" : aiWritten ? "AI draft" : edited ? "Edited draft" : "Draft"}</span>
         </div>
       </header>
 
@@ -116,11 +134,16 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
             ) : (
               <button type="button" className="button" onClick={() => setApproved(true)}>Approve message</button>
             )}
+            <button type="button" className="button button--ghost" onClick={rewrite} disabled={ai.status === "loading"} aria-busy={ai.status === "loading"}>
+              {ai.status === "loading" ? "Writing with AI…" : aiWritten ? "Rewrite again with AI" : "Rewrite with AI"}
+            </button>
             <button type="button" className="button button--ghost" onClick={copy}>{copied ? "Copied" : "Copy text"}</button>
-            {edited && <button type="button" className="link-button" onClick={regenerate}>Discard edits and regenerate</button>}
+            {edited && <button type="button" className="link-button" onClick={regenerate}>Back to the standard draft</button>}
           </div>
+          {ai.status === "error" && <p className="proposal__error" role="alert">{ai.message} The standard draft is still here.</p>}
           <p className="proposal__note">
             Nothing is sent from here. Once approved, copy it into your usual channel.
+            {aiWritten && " AI drafts use only facts from the plan, but read them before approving."}
           </p>
         </div>
 

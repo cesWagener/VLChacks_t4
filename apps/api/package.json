@@ -1,0 +1,13 @@
+{
+  "name": "sherpas-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Backend for the advisor web app. Holds the keys and calls the hackathon AI proxy.",
+  "engines": { "node": ">=22.6" },
+  "scripts": {
+    "start": "node --env-file=../../.env --experimental-strip-types src/server.ts",
+    "dev": "node --env-file=../../.env --experimental-strip-types --watch src/server.ts",
+    "check": "node --env-file=../../.env --experimental-strip-types scripts/check-connections.ts"
+  }
+}

@@ -7,6 +7,7 @@
 | Part | Folder | What it is |
 |---|---|---|
 | **Web app** | [`apps/web`](apps/web) | The advisor's Clients menu (search, wealth and sector filters) and a page per family with a proposed message on top of their plan. React + TypeScript + Vite. |
+| **API** | [`apps/api`](apps/api) | Backend for the web app. Holds the keys and calls the AI proxy (e.g. "Rewrite with AI" on the proposed message). Node, no dependencies. |
 | **WhatsApp bot** | [`apps/whatsapp-bot`](apps/whatsapp-bot) | Talks to clients over WhatsApp. Node + Baileys. |
 | **Docs** | [`docs`](docs) | Specs, e.g. [`client-menu-frontend-spec.md`](docs/client-menu-frontend-spec.md). |
 | **Challenge data** | [`cases`](cases), [`legal`](legal), [`assets`](assets) | Supplied by Sherpas, unchanged. The web app builds its data from `cases/`. |
@@ -14,12 +15,14 @@
 Run from the repo root (Node 22 or later):
 
 ```bash
-npm run setup      # installs both apps
+cp .env.example .env   # then fill in the keys (from your access page)
+npm run setup      # installs the web app and the bot
+npm run api        # backend at http://127.0.0.1:8787 (AI features)
 npm run web        # web app at http://localhost:5173/clients
 npm run bot        # WhatsApp bot (scan the QR on first run)
 ```
 
-The WhatsApp login (`apps/whatsapp-bot/auth/`) is local only and git-ignored. Each app's README has the details.
+Secrets stay local and git-ignored: `.env` (AI and MCP keys) and the WhatsApp login (`apps/whatsapp-bot/auth/`). Keys are only read by the backend, never by browser code. Each app's README has the details.
 
 ---
 

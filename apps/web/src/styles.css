@@ -455,3 +455,6 @@ a { color: var(--accent); }
   .fact-cards, .ratio-tiles { grid-template-columns: 1fr; }
   .cashflow__row { grid-template-columns: 110px 1fr 90px; }
 }
+
+.proposal__error { margin: 10px 0 0; font-size: 13px; color: #B23434; background: #FBE3E3; border-radius: var(--radius-input); padding: 8px 12px; }
+
