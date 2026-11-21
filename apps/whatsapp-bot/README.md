@@ -4,9 +4,9 @@ A WhatsApp bot built on [Baileys](https://github.com/WhiskeySockets/Baileys). It
 
 - **Sends approved messages.** The web app's Send button reaches the bot's outbox (`outbox.js`, `127.0.0.1:8788`) through the server. The outbox sends only to `OUTBOX_ALLOWED`, or else to the `ALLOWED` list.
 - **Answers replies as the family's advisor.** `ai.js` uses `gpt-5-mini` through the hackathon proxy. `contexto.js` remembers which family each chat is about.
-  - **The master prompt** is in [`prompts/advisor-system.md`](prompts/advisor-system.md). It sets the identity and the protocols: purchase traffic light, market drops, tax changes, proactive check-ins, numerical precision and WhatsApp format. Edit it there. It is re-read on every reply, so no restart is needed.
-  - **Filling the prompt:** `prompt.js` fills its placeholders with that family's case files from `cases/<id>/`: `persona.md`, the financial-health and investment-analysis fields the prompt refers to, `legal-values.json` and `signals.json`. It also adds today's date, the reply language and the last message the advisor sent.
-  - **Size, speed and cost:** about 75–90k characters of context per reply. Replies take 15–20 s and cost under one cent each.
+  - **The rules** are in [`prompts/advisor-system.md`](prompts/advisor-system.md), a compact version of the team's master prompt. The full original is [`docs/advisor-master-prompt.md`](../../docs/advisor-master-prompt.md). They cover identity, couple psychology, the purchase traffic light, market drops, tax changes, proactive check-ins, numerical precision and the WhatsApp format. Edit them there. They are re-read on every reply, so no restart is needed.
+  - **The family facts:** `prompt.js` fills `{{FAMILY_FACTS}}` with a short fact sheet built from `cases/<id>/`. It holds only the values the rules use, already formatted: profile D0–D6, concerns and tensions, score, goals, income, debts, insurance, cash, college and retirement facts, portfolio and past shocks, sectors, the savings priority order, 2026–2027 tax values and signals. It also adds today's date and the last message the advisor sent.
+  - **Size, speed and cost:** about 4,000–4,500 prompt tokens per reply, instead of ~20,000 for the raw files. With `reasoning_effort: low` (override with `LLM_REASONING_EFFORT`), replies take about 7–13 s and cost well under one cent.
 - **Lets you send from the terminal.** Type `34600111222 message` and press Enter.
 
 ## Run it

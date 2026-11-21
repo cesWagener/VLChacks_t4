@@ -13,6 +13,9 @@ import { buildSystemPrompt, caseExists } from "./prompt.js";
 
 const PROXY = (process.env.LLM_PROXY_URL || "https://llm-hackathon.sherpaswealth.com").replace(/\/+$/, "");
 const MODEL = process.env.LLM_MODEL || "gpt-5-mini";
+// "low" cuts gpt-5-mini's hidden reasoning from ~1,900 to ~400 tokens: replies in ~10 s instead of ~28 s,
+// with the same rules followed. Set LLM_REASONING_EFFORT=medium for more careful (slower) answers.
+const REASONING_EFFORT = process.env.LLM_REASONING_EFFORT || "low";
 
 const SIN_CONTEXTO =
   "Hi! This is your advisor's team. So I can help you properly, could you tell me your name? Your advisor will follow up with you personally.";
@@ -40,7 +43,7 @@ export async function responder({ jid, text, history }) {
     method: "POST",
     headers: { Authorization: `Bearer ${process.env.TEAM_KEY}`, "Content-Type": "application/json" },
     // No max_tokens: gpt-5-mini spends tokens on reasoning, and a low limit returns an empty answer.
-    body: JSON.stringify({ model: MODEL, messages }),
+    body: JSON.stringify({ model: MODEL, messages, reasoning_effort: REASONING_EFFORT }),
     signal: AbortSignal.timeout(40_000),
   });
   const data = await res.json().catch(() => null);
