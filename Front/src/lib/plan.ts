@@ -46,6 +46,15 @@ export interface PlanData {
 
   projections: { year: number; age: number; netWorth: number }[];
 
+  // investment-analysis.json → key_metrics.performanceAnalysis (three years to Nov 2026)
+  market: {
+    return3yAnnualized: number;          // 0.136 = 13.6% a year
+    maxDrawdown: number;                 // -0.102 = worst fall of 10.2%
+    recoveryDays: number | null;         // days to get back to the previous high
+    worstEvent: { title: string; date: string; drawdown: number; recoveryDays: number | null } | null;
+    topSector: string; topSectorPct: number;
+  } | null;
+
   persona: {
     concerns: { id: string; severity: Severity; title: string }[];
   };

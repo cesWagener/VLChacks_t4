@@ -24,6 +24,8 @@ const TONE_WHY: Record<Tone, string> = {
   supportive: "Supportive: acknowledge, reassure, one small step",
   steady: "Steady: honest and calm, act early",
   celebratory: "Celebratory: recognise progress",
+  reassuring: "Reassuring: for a market fall. Calm, their own past falls and recoveries, nothing to do today",
+  brief: "Brief: a short check-in, sized for a text message",
 };
 
 /**
@@ -93,7 +95,7 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
           <h2 id="proposal-title" className="proposal__title">For {plan.adults.join(" & ")}</h2>
         </div>
         <div className="proposal__status">
-          <span className={`tone-pill tone-pill--${draft.tone}`}>{TONES.find(t => t.id === draft.tone)!.label} tone</span>
+          <span className={`tone-pill tone-pill--${draft.tone}`}>{TONES.find(t => t.id === draft.tone)!.label.replace(/\s*\(.*\)$/, "")} tone</span>
           <span className="status-pill" data-approved={approved || undefined}>{approved ? "Approved" : edited ? "Edited draft" : "Draft"}</span>
         </div>
       </header>

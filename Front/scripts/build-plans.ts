@@ -37,6 +37,26 @@ function parseConcerns(md: string): PlanData["persona"]["concerns"] {
   return out;
 }
 
+// How the family's own portfolio behaved in past market falls, for the "Reassuring" message tone.
+function marketOf(pa: any): PlanData["market"] {
+  const h = pa?.household;
+  if (!h) return null;
+  const events = ((pa.perEventDrawdowns ?? []) as any[])
+    .filter(e => typeof e.household?.drawdownPct === "number")
+    .sort((a, b) => a.household.drawdownPct - b.household.drawdownPct);
+  const worst = events[0];
+  return {
+    return3yAnnualized: num(h.return3yAnnualized),
+    maxDrawdown: num(h.maxDrawdown3y),
+    recoveryDays: numOrNull(h.maxDrawdownRecoveryDays),
+    worstEvent: worst ? {
+      title: worst.eventTitle, date: worst.eventDate,
+      drawdown: worst.household.drawdownPct, recoveryDays: numOrNull(worst.household.recoveryDays),
+    } : null,
+    topSector: pa.concentration?.topSectorName ?? "", topSectorPct: num(pa.concentration?.topSectorPct),
+  };
+}
+
 const [casesDir, outDir] = process.argv.slice(2);
 mkdirSync(outDir, { recursive: true });
 
@@ -129,6 +149,7 @@ for (const slug of readdirSync(casesDir).sort()) {
       educationGap: num(ef.retirementAndEducationGaps.educationGap),
     },
     projections: (fh.projections.yearly as any[]).map(p => ({ year: p.year, age: p.age_client, netWorth: Math.round(num(p.net_worth)) })),
+    market: marketOf(ia.key_metrics.performanceAnalysis),
     persona: { concerns: parseConcerns(persona) },
   };
 

@@ -106,6 +106,19 @@ for (const id of [JOHNSON, CARTER, LEWIS, WEAH]) {
   assert.ok(d.firstStep, `${id}: no first step`);
   assert.match(d.body, /David$/);
 }
+// The two hand-picked tones: reassuring uses the family's own market history; brief stays short.
+const reassuring = draftMessage(plan(CARTER), { today, tone: "reassuring" });
+assert.match(reassuring.body, /fell about 8\.4%/);
+assert.match(reassuring.body, /back at its previous high within 62 days/);
+assert.deepEqual(reassuring.usedIssues, []);
+for (const id of [JOHNSON, CARTER, LEWIS, WEAH]) {
+  for (const tone of ["reassuring", "brief"] as const) {
+    const d = draftMessage(plan(id), { today, tone });
+    assert.ok(!/undefined|NaN|\$-/.test(d.subject + d.body), `${id} ${tone}: broken value`);
+    assert.match(d.body, /David$/);
+  }
+  assert.ok(draftMessage(plan(id), { today, tone: "brief" }).body.length < 400, `${id}: brief is not brief`);
+}
 // Topics chosen by the advisor replace the automatic pick.
 assert.deepEqual(draftMessage(plan(CARTER), { today, issueKeys: ["umbrella"] }).usedIssues, ["umbrella"]);
 assert.match(draftMessage(plan(CARTER), { today, issueKeys: ["umbrella"] }).body, /umbrella/);

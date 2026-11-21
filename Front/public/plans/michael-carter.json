@@ -574,6 +574,19 @@
       "netWorth": 2812003
     }
   ],
+  "market": {
+    "return3yAnnualized": 0.1361,
+    "maxDrawdown": -0.1021,
+    "recoveryDays": 62,
+    "worstEvent": {
+      "title": "Liberation Day tariffs announced",
+      "date": "2025-04-02",
+      "drawdown": -0.0841,
+      "recoveryDays": null
+    },
+    "topSector": "Technology",
+    "topSectorPct": 0.4094
+  },
   "persona": {
     "concerns": [
       {

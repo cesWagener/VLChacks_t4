@@ -6,13 +6,18 @@
 //   supportive   score band critical or vulnerable: acknowledge, normalise, one small step, no pressure
 //   steady       stable band, or a severe issue under a good score: honest, calm, act early
 //   celebratory  strong band and nothing severe: recognise progress, one small tidy-up
+// Two more tones the advisor picks by hand (never automatic):
+//   reassuring   for a market fall: calm, this is normal, the family's own past falls and recoveries, no action needed
+//   brief        a short check-in, sized for a text message: one point and one question
 import type { PlanData } from "./plan.ts";
 
-export type Tone = "supportive" | "steady" | "celebratory";
+export type Tone = "supportive" | "steady" | "celebratory" | "reassuring" | "brief";
 export const TONES: { id: Tone; label: string }[] = [
   { id: "supportive", label: "Supportive" },
   { id: "steady", label: "Steady" },
   { id: "celebratory", label: "Celebratory" },
+  { id: "reassuring", label: "Reassuring (market fall)" },
+  { id: "brief", label: "Brief (text message)" },
 ];
 
 export interface TalkingPoint {
@@ -42,6 +47,7 @@ const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD",
 const money = (n: number) => usd.format(Math.round(n));
 const roundMoney = (n: number) => money(n >= 1_000 ? Math.round(n / 100) * 100 : n);
 const pct = (r: number) => `${Math.round(r * 100)}%`;
+const pct1 = (r: number) => `${(r * 100).toFixed(1).replace(/\.0$/, "")}%`;
 const monthYear = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 const capFirst = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -214,9 +220,10 @@ export function draftMessage(p: PlanData, opts: DraftOptions = {}): Draft {
   const strengths = findStrengths(p);
   const auto = autoTone(p, issues);
   const tone = opts.tone ?? auto;
-  const chosen = opts.issueKeys
+  const picked = opts.issueKeys
     ? issues.filter(i => opts.issueKeys!.includes(i.key))
-    : issues.slice(0, tone === "celebratory" ? 1 : 2);
+    : issues.slice(0, tone === "reassuring" ? 0 : tone === "celebratory" || tone === "brief" ? 1 : 2);
+  const chosen = tone === "brief" ? picked.slice(0, 1) : picked; // a text message carries one point
   const milestone = upcomingMilestone(p, today);
   const firstStep = pickFirstStep(p, chosen[0]);
   const names = joinNames(p.adults);
@@ -261,6 +268,31 @@ export function draftMessage(p: PlanData, opts: DraftOptions = {}): Draft {
     if (firstStep) paras.push(`A first step I'd suggest: ${firstStep}.`);
     paras.push("Would you have 30 minutes in the coming weeks? I'll come prepared with options.");
     paras.push(`Best,\n${advisorName}`);
+  } else if (tone === "reassuring") {
+    // Problem 2 in the challenge: markets fall and families panic alone. Lead with calm, then their own numbers.
+    const mk = p.market;
+    subject = "Markets are moving: what it means for you";
+    paras.push("With markets moving the way they have, I wanted to check in before the headlines do the talking.");
+    paras.push("The short version: falls like this are normal, and your plan was built with them in mind.");
+    if (mk) {
+      const facts: string[] = [];
+      if (mk.worstEvent) facts.push(`When the ${mk.worstEvent.title.replace(/\s+announced$/i, "")} were announced in ${monthYear(mk.worstEvent.date)}, your portfolio fell about ${pct1(-mk.worstEvent.drawdown)}.`);
+      if (mk.maxDrawdown < 0) facts.push(`Its worst fall over the last three years was about ${pct1(-mk.maxDrawdown)}${mk.recoveryDays ? `, and it was back at its previous high within ${mk.recoveryDays} days` : ""}.`);
+      if (mk.return3yAnnualized > 0) facts.push(`Over the same three years it grew about ${pct1(mk.return3yAnnualized)} a year.`);
+      if (facts.length) paras.push(`Your own portfolio has been through this before. ${facts.join(" ")}`);
+    }
+    if (milestone) paras.push(`Money you need soon, like for ${milestone.label} in ${monthYear(milestone.date)}, shouldn't have to ride the market. If it would help, we can check together that it is set aside.`);
+    if (i1) paras.push(`Separately from the markets, when we next talk I'd also like to look at this: ${listJoin(chosen.map(i => i.text))}.`);
+    paras.push("There is nothing you need to do today. Selling after a fall usually turns a temporary dip into a permanent loss. If you would like to talk it through, I'm one call away.");
+    paras.push(`Best,\n${advisorName}`);
+  } else if (tone === "brief") {
+    subject = "Quick check-in";
+    const parts = ["I was looking at your plan today."];
+    if (i1) parts.push(`One thing worth a quick chat: ${listJoin(chosen.map(i => i.text))}.`);
+    else if (s1) parts.push(`Everything looks on track: ${s1.text}.`);
+    parts.push(i1 ? "Do you have 15 minutes this week?" : "Anything new on your side I should know about?");
+    paras.push(parts.join(" "));
+    paras.push(advisorName);
   } else {
     subject = "Good news from your plan review";
     paras.push("Good news from your latest plan review, and I wanted you to hear it from me.");

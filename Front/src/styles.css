@@ -318,6 +318,11 @@ a { color: var(--accent); }
 .tone-pill--supportive { background: #FCEDE8; color: #B4532F; }
 .tone-pill--steady { background: var(--accent-soft); color: var(--accent); }
 .tone-pill--celebratory { background: #E3F5EA; color: #17804A; }
+.tone-pill--reassuring { background: #E2F3F6; color: #1F6F80; }
+.tone-pill--brief { background: #F1ECFB; color: #6741B8; }
+.proposal[data-tone="reassuring"] { border-top-color: #2A93A8; }
+.proposal[data-tone="brief"] { border-top-color: #8B6AD6; }
+.proposal[data-tone="brief"] .field__textarea { min-height: 140px; }
 .status-pill { background: #EEF0F6; color: var(--text-muted); }
 .status-pill[data-approved] { background: #E3F5EA; color: #17804A; }
 .proposal__grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; }
