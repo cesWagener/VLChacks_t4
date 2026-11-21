@@ -1,0 +1,695 @@
+{
+  "id": "timothy-melanie-weah",
+  "displayName": "Timothy & Melanie Weah",
+  "adults": [
+    "Timothy",
+    "Melanie"
+  ],
+  "household": [
+    {
+      "firstName": "Timothy",
+      "role": "client",
+      "age": 40,
+      "retirementAge": 62,
+      "riskProfile": "Growth"
+    },
+    {
+      "firstName": "Melanie",
+      "role": "co-client",
+      "age": 38,
+      "retirementAge": 60,
+      "riskProfile": "Moderate"
+    },
+    {
+      "firstName": "Liam",
+      "role": "child",
+      "age": 6
+    },
+    {
+      "firstName": "Josh",
+      "role": "child",
+      "age": 3
+    }
+  ],
+  "city": "San Francisco",
+  "state": "CA",
+  "planUrl": "https://app.sherpaswealth.com/plan/shared/RcCtgoNkGmD6dvGtYVKWLGefdCTFdc4JP_jH9Jbz2jo",
+  "score": {
+    "value": 60,
+    "band": "stable",
+    "colour": "yellow",
+    "message": "Your score of 60 suggests that while you manage to get by, you aren't thriving financially, often leading to stress and financial disorganization. Enhancing your financial health and creating a strategic plan could unlock your money's potential and help you gain control of your desired life.",
+    "pillars": [
+      {
+        "pillar": "Savings and cash flow",
+        "points": "26/30"
+      },
+      {
+        "pillar": "Debt",
+        "points": "12/20"
+      },
+      {
+        "pillar": "Investments",
+        "points": "8/15"
+      },
+      {
+        "pillar": "Liquidity and emergency fund",
+        "points": "15/15"
+      },
+      {
+        "pillar": "Insurance and protection",
+        "points": "7/20"
+      }
+    ],
+    "topMoves": [
+      {
+        "title": "Pay down revolving card",
+        "action": "Pay $6,800 on the 18% card from cash to remove high revolving exposure and clear the gate",
+        "scoreBefore": 60,
+        "scoreAfter": 62
+      },
+      {
+        "title": "Add life cover",
+        "action": "Add $235,000 of life cover to raise the mortality ratio and clear the gate",
+        "scoreBefore": 60,
+        "scoreAfter": 60
+      },
+      {
+        "title": "Add umbrella cover",
+        "action": "Add $1M of umbrella to raise the liability shield",
+        "scoreBefore": 60,
+        "scoreAfter": 60
+      }
+    ]
+  },
+  "goalsSummary": [
+    "Both Timothy and Melanie want to retire in 2048 at ages 62 and 60.",
+    "Going on a $6,000 vacation every year.",
+    "Finance education for 2 children ($45,000 in total for each child).",
+    "Plan to purchase a home for $600,000 in 2030.",
+    "Plan to purchase a vehicle for $45,000 in 2028."
+  ],
+  "goals": [
+    {
+      "name": "Go on vacation",
+      "type": "VACATION",
+      "date": "2027-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Purchase a vehicle",
+      "type": "PURCHASE",
+      "subType": "VEHICLE_PURCHASE",
+      "date": "2028-07-01T00:00:00.000Z"
+    },
+    {
+      "name": "Purchase a home",
+      "type": "PURCHASE",
+      "subType": "REAL_ESTATE_PURCHASE",
+      "date": "2030-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "College Liam",
+      "type": "COLLEGE",
+      "date": "2038-08-01T00:00:00.000Z"
+    },
+    {
+      "name": "College Josh",
+      "type": "COLLEGE",
+      "date": "2041-08-01T00:00:00.000Z"
+    },
+    {
+      "name": "Melanie's Retirement",
+      "type": "RETIREMENT",
+      "date": "2048-03-01T00:00:00.000Z"
+    },
+    {
+      "name": "Timothy's Retirement",
+      "type": "RETIREMENT",
+      "date": "2048-04-01T00:00:00.000Z"
+    }
+  ],
+  "narrative": {
+    "summary_main": "- You earn $270,000 a year together and have $728,500 in equity, yet only $210,000 is in investable assets. Another $150,000 sits in cash, and your home makes up 44% of your total assets.\n- Your retirement plan is a real strength. As a projection to age 91, income covers 93% of your yearly spending need, you capture both full employer matches, and your savings never run out in the plan.\n- Your cash is also a strength: $150,800 covers about 16 months of essentials, against the 8 to 9 months recommended. About $60,223 sits above that reserve and your near-term goals.\n- The central tension is that this spare cash sits idle while protection is open. Timothy has $140,000 of life insurance against a $750,000 recommended minimum. Melanie has $110,000 against $600,000. You have no umbrella policy, a $1,000,000 gap, and an $18,000 card balance at 18%.\n- Education is the other open need. You have $0 in 529s, and about $113,509 of college funding is still needed, or roughly $4,609 more saved each year. Liam starts college in 2038 and Josh in 2041. Your invested mix is about 81% stocks, and Timothy and Melanie have different comfort levels with risk.\n- A realistic direction is to decide together how to use the spare cash and your yearly cash flow across life insurance, an umbrella policy, the card and education saving. They compete for the same dollars, so the order is your choice. Keep the retirement plan and employer matches as they are.",
+    "summary_recommendations": "- Put part of the cash you hold above your emergency reserve and near-term goals to work on the open protection gaps, starting with life insurance for both of you, since two young children rely on both incomes.\n- Consider an umbrella policy, because a liability claim could reach well beyond what you currently have covered.\n- Look at paying off the high-rate credit card balance with some of that same cash, since it is your most expensive debt and your cash comfortably exceeds what you need to hold.\n- Decide how college saving for Liam and Josh should share your cash flow with the other priorities, since nothing is set aside for it yet.\n- Revisit your invested mix together so it sits where both of you are comfortable, given that your risk comfort levels differ.",
+    "retirement_short_observations": "- Your retirement plan looks well supported as a projection: income is projected to cover 93% of the $184,303.51 you would need each year, averaged over 31 retirement years, and your money doesn't run out before age 91.\n- Almost all of that coverage comes from guaranteed income (Social Security and annuities, $171,055.83 per year on average), while other income covers only 0.2%. The plan's strength therefore rests on those guaranteed sources holding up as projected.\n- Your savings are projected to cover only about $12,852.82 per year of spending on average, and the average draw is 1.0% of savings at the start of retirement. Savings and investments of $2,371,900.89 (today's dollars) are projected to remain at the end of the plan, which leaves a cushion if things come in worse than expected.\n- Cash flow is projected to turn negative in several years, including 2030, 2041 and 2048 to 2053. Given the large projected savings, this matters less than the overall picture, but it shows spending will not be smooth year to year. No long-term care cost is included, and you have other goals after retirement totaling $673,481.06.\n- Timothy's Growth and Melanie's Moderate risk profiles differ, and the portfolio is about 77% equity against a 60% Moderate target. That could add growth over the 21 years before retirement but also brings larger swings, so agreeing on how much swing you both can accept is worth considering. Your spending picture is also low confidence, so the projection is only as firm as those expense figures.",
+    "retirement_what_to_look_into": "**We should look into**: how reliable the guaranteed income from Social Security and annuities is, since it carries most of the plan, how the plan pays for the years when cash flow turns negative, and confirming actual spending so the projection rests on firm figures.",
+    "assets_short_observations": "- Your wealth sits mostly in your home: real estate is $350,000, or 44.4% of your $788,500 in total assets. That is a large share in one asset you can't easily spend, though you hold $300,000 of equity in it, with only a $50,000 mortgage (85.7% equity).\n- You hold $150,000 in cash against $210,000 in invested savings. Since invested savings are what retirement mostly rests on, this means a large part of your liquid wealth isn't set up to grow over the long term. The cash does give you a flexible cushion.\n- Your invested savings are 81.2% in stocks, against a 98.0% target. Timothy's risk profile is Growth and Melanie's is Moderate, so one household mix may fit each of you differently.\n- You are saving toward retirement steadily: both employer matches are fully captured, worth $8,000 and $6,000 a year, so no match is being left behind.",
+    "assets_what_to_look_into": "**We should look into**: how the $150,000 of cash fits alongside your invested savings, whether IRAs and an HSA could suit you given the limits you could contribute up to, and how the 81.2% stock mix compares with each person's risk profile, once the current mix per person is confirmed.",
+    "debt_short_observations": "- Your debt is manageable overall: $93,000 in total, with debt payments equal to 13.2% of your $270,000 income. The one costly exception is the $18,000 Chase card at 18%, while your mortgage, student loan and vehicle loan carry lower rates of 6%, 5.5% and 4.5%.\n- Counting housing costs too, your obligations take 15.1% of income, well under the 36% level lenders often watch first. Your debt load isn't what limits you right now.\n- The card is paid at $300 a month, which is close to the $270 a year of interest it generates. That is a small slice of the payment, but it means the 18% rate is the part of your debt most worth understanding.\n- If the $300 payment holds, the card is projected to be paid off in September 2039, about 12 years out. That is a projection, and it could shift because your monthly spending may be understated in the data.\n- You hold $150,800 in accessible cash, above the $75,180 to $84,577.50 reserve of 8 to 9 months of essential expenses. About $60,222.50 sits above the reserve and near-term goals. Weighing that cash against the 18% balance is the main trade-off, and keeping a healthy reserve matters more than the debt ratios.",
+    "debt_what_to_look_into": "**We should look into**: how the credit card balance compares with the cash held above your reserve, the card's payoff timeline at the current payment, and confirming your monthly spending, since expense figures may be understated.",
+    "savings_short_observations": "- You save $61,500 a year, 22.8% of your $270,000 income, and both employer matches are fully captured. Your retirement saving is on track, with no extra needed.\n- Your cash flow shows $36,960.75 a year left over (13.7%), but this figure is low confidence and spending may be understated. It matters because every other goal draws on the same uncertain surplus.\n- You hold $150,800 in cash, above the 8 to 9 months of essential expenses ($75,180 to $84,577.50) that would cover emergencies. About $60,222.50 sits beyond that reserve and your $6,000 vacation goal, so safety is well covered.\n- Education is your main unfunded goal: $0 is in 529 accounts, and meeting it would take about $4,609.22 more per year, a first-year projection that rises each year. That is 1.7% of your income, small next to the idle cash but dependent on your real spending.\n- Your Roth IRAs have $0 contributed so far. You could each contribute up to $5,250.10, though this competes with education for the same surplus.",
+    "savings_what_to_look_into": "**We should look into**: confirming your actual day-to-day spending, how the cash you hold above your reserve could support education saving and the 18% card, and whether Roth IRA contributions fit your plans.",
+    "protection_intro": "With Liam and Josh relying on both of your incomes, protection is where your picture is most uneven: your emergency fund is a real strength, giving you a solid cushion if something unexpected happens. Life insurance and umbrella coverage are where your household is more exposed, and the sections below explain each of these three areas in plain terms.",
+    "protection_emergency_fund_short_observations": "- Your $150,801 in accessible cash covers about 16 months of essential expenses, well above the 8 to 9 months recommended for a household with two young children and two incomes. There is no shortfall, so your cash cushion is a clear strength, and it still covers about 15.4 months after your $6,000 vacation payment.\n- Cash above the emergency reserve and your near-term goals comes to $60,223. That is a resource you have available as you look at the other protection gaps.",
+    "protection_life_insurance_short_observations": "- Timothy has $140,000 of life insurance against a recommended range of $750,000 to $1,500,000, a shortfall of $610,000. Melanie has $110,000 against a range of $600,000 to $1,200,000, a shortfall of $490,000. Neither of you has any excess, and both of you do hold some coverage. With Liam (6) and Josh (3) depending on both incomes, these gaps matter for your household.\n- Your household relies on two incomes, $150,000 from Timothy and $120,000 from Melanie. Losing either one would be hard for two young children to absorb.\n- Obligations would remain if one of you were gone: you have $93,000 of listed debt, including an 18% credit card of $18,000, and you still need $113,509 for college beyond current 529 balances.",
+    "protection_umbrella_short_observations": "- You have no umbrella policy, against a recommended minimum of $1,000,000, so the full $1,000,000 is uncovered. A liability claim could reach your net worth of $695,500, which makes this a real exposure rather than a prediction.\n- Your home and both vehicles are insured, but that cover is separate from umbrella liability protection and doesn't fill this gap.\n- A claim could reach $428,500 of assets ($368,500 of equity), and your $360,000 in liquid assets would be within reach too. That is the savings you are building for Liam and Josh.\n- Your cash cushion is a genuine strength, but it would be the money exposed in a claim, not a substitute for liability cover. The study has no policy quote or other liability exposure, so the cost and the right amount of cover remain open questions."
+  },
+  "investmentNarrative": {
+    "summary_main": "- **What your portfolio is for** — Your portfolio should fund retirement and help with college for Liam and Josh. Retirement looks on track, with no gap in the plan. College is the clear shortfall: nothing is set aside, and $113,508.60 is still needed.\n\n- **The numbers in plain English** — You save 22.8% of your income, which is strong. You hold about $150,800 of reachable cash, roughly 16 months of essential expenses, but it earns about 0.09%. About $60,222.50 sits above what you need to hold. Putting cash to work could add about $7,000 a year.\n\n- **Where to act first** — Use part of the extra cash toward the $18,000 card at 18%, then begin college saving of about $4,609 a year. Timothy could add up to $10,500 and Melanie up to $13,500 in 401(k) deferrals this year, which could cut your tax by about $5,760. Moving the brokerage bond fund JNK into a retirement account could remove about $224 a year of tax.\n\n- **One caveat** — Reported expenses look understated, so the cash flow figures, including net cash flow of $36,960.75, are low-confidence. Please confirm your actual spending before committing to new monthly amounts.\n\n- **Worth watching** — Timothy's Roth holds a leveraged fund (UPRO) of $12,740, and technology is 30% of your stock investments. Neither is urgent, but both are worth watching.",
+    "snapshot_main": "This snapshot draws on the accounts you each hold: Timothy and Melanie each have their own traditional and Roth retirement accounts, there is a taxable brokerage account, and a separate cash account sits outside the invested total. Your invested assets come to $210,000, with the $150,000 of cash held apart from them. Looking across that invested money, it is weighted heavily toward stocks, at about 77% in equity.",
+    "portfolio_today_intro": "The central tension is that the invested money behaves more like a growth portfolio than the Moderate comfort level the household states, and it has to support goals that cannot easily absorb a bad stretch: a retirement both of you are working toward and college years that are coming up for Liam and Josh. Beside it sits a large cash balance that is far more than a safety reserve needs, yet earns almost nothing while an expensive card balance stays open. So the question is less whether the pieces are sound on their own and more whether, together, they are set up to do the job you need from them.",
+    "portfolio_today_what_it_needs_to_do": "- **Retirement income** — You are aiming to retire at 62 (Timothy) and 60 (Melanie), about 21 years from now. The plan is on track: income covers about 93% of your spending need, with $2,371,900.89 left at the end of the plan. You save 22.8% of your income, and both employers' contributions are being captured. The portfolio's job here is to keep that path steady.\n- **Education for Liam and Josh** — Liam starts college in August 2038 and Josh in August 2041. Nothing is in 529 accounts yet, and the funding gap is $113,508.60. Saving about $4,609 more a year would begin to close it, so this money needs a defined home and a timeline.\n- **Safety reserve and near-term spending** — Your cash needs to cover an emergency reserve of 8 to 9 months of essential expenses, plus the $6,000 vacation in January 2027. That comes to roughly $81,000–$91,000. Your accessible cash of $150,800 covers about 16 months, so this job is more than met. About $60,000 sits above what the reserve and near-term goals call for.\n- **Long-term growth for the rest** — The $210,000 invested across your 401(k)s, Roth accounts and brokerage account is meant to grow over a long horizon. Your household's stated comfort level is Moderate, with a 60% stock target, so this money should grow in a way you can both stay comfortable with.",
+    "portfolio_today_what_its_actually_doing": "- **Stock-heavy mix** — About 77% of your $210,000 invested is in stocks, against a 60% Moderate target. Because more of the money is in stocks than that profile implies, your portfolio will swing more than a Moderate profile suggests. Timothy's Growth comfort and Melanie's Moderate comfort are both served by this same single mix.\n- **Technology tilt** — Technology is about 30% of your stock holdings, the largest slice, and no other sector exceeds 14.6%. It comes through broad funds, not single stocks, so no one company drives it. Still, a downturn in technology would reach your stocks more than a sector spread evenly would.\n- **Leveraged fund** — Timothy's Roth holds UPRO, a leveraged ETF worth $12,740. Leverage magnifies daily market moves, so this one holding can rise or fall by more than the market around it. It also helps explain why that account has been the most volatile of your five invested accounts.\n- **Idle cash beside costly debt** — Your $150,000 cash account earns about 0.09%, and $60,222.50 sits above your reserve and near-term goals. Meanwhile the $18,000 Chase card charges 18%, about $270 a year in interest. The cash is earning very little while the debt costs far more.",
+    "portfolio_today_performance_timeline": "Over the three years to November 2026, your household portfolio grew at about 11.7% a year. A diversified portfolio holding the same overall mix of stocks, bonds and cash grew about 12.7% a year, so you finished roughly one percentage point behind it. Your ups and downs were also close to that comparison. The portfolio moved about 7.5% a year around its average, against 6.8% for the comparison. The worst fall was about 9%, and it recovered in 37 days.\n\nThe most meaningful pattern is that you moved in close step with the comparison in both directions. In rising markets you captured about 1.10 times its gains, and in falling markets about 1.06 times its losses. That is a nearly even trade, so the difference in return looks small rather than structural. The risk-adjusted measure, which is return earned above cash per unit of ups and downs, was 1.08 for you and 1.33 for the comparison. That is a modest gap. Your 360,000 dollars of assets include 150,000 dollars of cash, which pulls the household's overall stock share down to about 45%. The invested accounts alone run closer to 77% stocks and returned about 20% a year. Timothy's smaller Roth account returned about 41% with much larger swings, which fits its leveraged fund. That result may not repeat.\n\nTwo market moments stand out. When tariffs were announced on 2 April 2025, the portfolio fell about 7.1%, against 6.2% for the comparison, so it fell a little harder. A week later, in the tariff-pause rally on 9 April 2025, it fell only 1.6% against 2.4%, and held up better. A third episode, the last Fed rate hike in July 2023, fell about 4.2% against 3.6%. These are only three episodes, and the paths stayed close throughout, so they show a pattern in how the portfolio behaves, not a clear verdict.",
+    "portfolio_today_whats_working": "- **Retirement plan holds up** — Your plan shows a retirement gap of 0, with $2,371,900.89 left at the end of the plan. With Timothy retiring at 62 and Melanie at 60, income covers 93% of the spending need. The goal is funded on today's path.\n- **Strong saving habit** — You save 22.78% of gross income, about $61,500 a year. That is above the 20% level often used as a benchmark. This steady habit is the reason retirement is funded, and it gives both of you a base to build on.\n- **Employer contributions captured** — Your employers add $14,000 a year to your retirement plans: $6,000 for Melanie and $8,000 for Timothy. Both of you are taking what is offered, so that money joins your own savings each year instead of going unclaimed.\n- **Deep cash cushion** — Your accessible cash of $150,800 covers about 16 months of essential expenses, against a recommended 8 to 9 months. It also covers the $6,000 vacation due January 2027. A job loss or medical event could be handled without selling investments.\n- **Tax variety across accounts** — Each of you holds both traditional and Roth retirement accounts, and you also have a taxable brokerage account. That gives you three tax treatments to draw on later. Most of the cost of holding bond funds already sits in tax-deferred accounts, such as LQD and SCHP.",
+    "portfolio_today_priorities": "- **Stock weight and concentration** — Your invested $210,000 is about 77% equity against a 60% Moderate target, with technology near 30% of the equity and $12,740 in a leveraged ETF (UPRO) in Timothy's Roth. It will likely swing more than a Moderate comfort level implies, so the risk level needs to move closer to what you both want.\n- **Idle cash beside costly debt and education** — About $60,222.50 of your $150,800 accessible cash sits above your reserve and near-term goals, while an $18,000 card balance carries 18% interest. Nothing is in 529 accounts against a $113,508.60 education gap. That cash needs a clearer job across these needs.\n- **Low-paying cash reserve** — Your $150,000 cash account earns about 0.09%, so even the reserve you should keep liquid earns very little. Moving it to a competitive cash rate would be worth roughly $2,808 a year while keeping it fully accessible.",
+    "portfolio_today_verdict": "Your retirement accounts are doing their main job well: you save 22.8% of your gross income, your employers add $6,000 (Melanie) and $8,000 (Timothy) a year, and the plan is funded with no retirement gap and $2,371,900.89 projected at plan end. The vulnerability is how the money is invested, not how much you put in. Your long-term holdings run at 77.4% stocks against a 60.0% target, Timothy's Roth holds a leveraged fund (UPRO) worth $12,740, and technology is 30.0% of your stock investments, so a market fall could hit harder than your target profile intends. Timothy's Roth returned 41.1% with 30.0% volatility, and that result may not repeat. With about 22 years left for this money, a funded plan is worth protecting from swings it doesn't need to take. You also have contribution limits you haven't reached: since you both already defer to a 401(k), Timothy can add at most $10,500 and Melanie $13,500 this year, which could save about $5,760 in tax. A clear path forward means deciding together how much risk these accounts should carry and which additions fit your cash flow, which we still need to confirm because your reported expenses look understated.",
+    "portfolio_today_also_meaningful": "A health savings account is a secondary step for you, best taken after the larger items, such as the 18% card balance, have been dealt with. Neither of you has contributed to one so far, and the household limit is $8,750, so you could contribute up to $8,750 between you. The benefit of starting is a tax-advantaged place to set aside money for health costs, and the savings study puts the tax saving at about $2,100 a year at your current 24% marginal rate. That figure applies only if your health plan qualifies for an HSA, and the data does not yet show whether it does, so checking that comes first. Because your cash flow figures are uncertain and your expenses may be understated, size any contribution to what your monthly budget comfortably allows, and weigh it against your other savings goals, including college. A loss inside an HSA gives no tax deduction, so tax-loss harvesting does not apply there. The data holds no balances, investments or tax-drag findings for an HSA, so there is nothing more specific to say about how one would be held. It is worth agreeing together how much to put in and how it should be invested.",
+    "recommendations_main": "- **Put your surplus cash to work** — You hold $150,800 in accessible cash, about 16 months of essential expenses, while an 8–9 month reserve is the target. About $60,222.50 sits above the reserve and your January 2027 vacation, and most of your cash earns about 0.09%. Keeping the reserve liquid at a competitive rate and putting the surplus to use in line with your long-term plan could add about $7,000 a year.\n- **Decide how the 18% card fits in** — Your Chase card carries $18,000 at 18%, with $300 paid each month, while cash sits idle beside it. The interest costs roughly $270 a year. Using part of the surplus cash to retire it could remove a high-rate cost. It is worth talking through together, so you are both comfortable with how much goes there.\n- **Start saving for Liam and Josh's college** — Nothing is in 529 accounts, and the funding gap is $113,508.60. Saving about $4,609 more each year would begin to close it, and starting early spreads the cost over more years. Your retirement plan is already on track, so this is the main goal still unfunded. Because reported expenses may be understated, confirm this amount fits your monthly cash flow.\n- **Use your retirement-plan and HSA limits where you can** — Timothy could add up to $10,500 and Melanie up to $13,500 more in 401(k) deferrals, which could save about $5,760 a year in tax. If your health plan qualifies, you could contribute up to $8,750 to an HSA, worth about $2,100 a year in tax. Your employer match rules still need confirming.\n- **Talk through the level of risk you both want** — Your long-term accounts hold 77.4% in stocks against a 60.0% target. They include a leveraged fund of $12,740, and technology is 30.0% of your stock investments. Your household income is also 38.8% of your net worth. Agreeing on a comfortable level of risk would keep the plan steady for both of you.",
+    "recommendations_scenarios": "- **Three real market events, small differences** — Over the last three years your whole household balance sheet returned 11.7% a year. That is about 1 percentage point a year less than a diversified portfolio with the same overall stock share, and the ups and downs were very similar. When US tariffs were announced in April 2025, you fell 7.1% against 6.2% for that comparison, so a little harder. When the tariff pause lifted markets days later, you fell 1.6% against 2.4%, so you held up better. When interest rates peaked in July 2023, you fell 4.2% against 3.6%. The mixed pattern shows no consistent weakness, and past events do not predict how any future one will go.\n- **Your invested portfolio leans toward stocks** — The accounts you invest hold about 77% stocks, against a 60% Moderate target. In a sharp stock-market fall, those accounts may feel the swings more than a 60% mix would. The leveraged fund (UPRO, $12,740) in Timothy's Roth account is part of this. Over three years that account returned 41.1% but moved much more, with volatility of 30.0%. That result may not repeat, and it shows how strongly it can swing both ways. It is worth talking through the level of stock exposure you both are comfortable with. Nothing here promises protection.\n- **Your cash cushions the household, not the portfolio** — About $150,800 of accessible cash, roughly 16 months of essential expenses, softens swings across your overall finances. That is why the whole household's worst fall over three years was only 9.15%, and it recovered in 37 days. The cash does not change how the invested portfolio itself behaves in a downturn. A market event could still hit those accounts as hard as their stock share suggests."
+  },
+  "metrics": {
+    "incomes": [
+      {
+        "owner": "Melanie",
+        "yearly": 120000
+      },
+      {
+        "owner": "Timothy",
+        "yearly": 150000
+      }
+    ],
+    "totalAssets": 788500,
+    "netWorth": 695500,
+    "investable": 210000,
+    "totalDebt": 93000,
+    "monthlyDebtPayment": 2960,
+    "assets": [
+      {
+        "name": "Cash account",
+        "total": 150000,
+        "count": 1
+      },
+      {
+        "name": "Investment account",
+        "total": 210000,
+        "count": 5
+      },
+      {
+        "name": "Real estate",
+        "total": 350000,
+        "count": 1
+      },
+      {
+        "name": "Vehicle",
+        "total": 58500,
+        "count": 2
+      },
+      {
+        "name": "Other asset",
+        "total": 20000,
+        "count": 1
+      }
+    ],
+    "liabilities": [
+      {
+        "name": "Credit card",
+        "total": 18000,
+        "count": 1
+      },
+      {
+        "name": "Student loan",
+        "total": 15000,
+        "count": 1
+      },
+      {
+        "name": "Personal loan",
+        "total": 10000,
+        "count": 1
+      },
+      {
+        "name": "Real estate debt",
+        "total": 50000,
+        "count": 1
+      }
+    ],
+    "debtToIncome": 0.1316,
+    "housingRatio": 0.1083,
+    "cashflow": {
+      "inflow": 270000,
+      "outflows": [
+        {
+          "name": "Taxes",
+          "total": 72765.25,
+          "items": [
+            {
+              "name": "Federal Income Tax",
+              "total": 36267.98
+            },
+            {
+              "name": "FICA tax",
+              "total": 20835
+            },
+            {
+              "name": "State Income Tax",
+              "total": 15662.27
+            }
+          ]
+        },
+        {
+          "name": "Expenses",
+          "total": 72004,
+          "items": [
+            {
+              "name": "Living Expenses",
+              "total": 72000
+            },
+            {
+              "name": "Insurance payments",
+              "total": 4
+            }
+          ]
+        },
+        {
+          "name": "Savings",
+          "total": 47500,
+          "items": [
+            {
+              "name": "401k - Traditional savings",
+              "total": 25000
+            },
+            {
+              "name": "Brokerage account savings",
+              "total": 15000
+            },
+            {
+              "name": "Cash savings",
+              "total": 7500
+            }
+          ]
+        },
+        {
+          "name": "Housing Expenses",
+          "total": 29250,
+          "items": [
+            {
+              "name": "Mortgage",
+              "total": 24000
+            },
+            {
+              "name": "Property Taxes",
+              "total": 3500
+            },
+            {
+              "name": "Home Insurance",
+              "total": 1750
+            }
+          ]
+        },
+        {
+          "name": "Debt Payments",
+          "total": 11520,
+          "items": [
+            {
+              "name": "Car loan payments",
+              "total": 4800
+            },
+            {
+              "name": "Credit card payments",
+              "total": 3600
+            },
+            {
+              "name": "Student loan payments",
+              "total": 3120
+            }
+          ]
+        }
+      ],
+      "free": 36960.75
+    },
+    "savings": {
+      "amount": 61500,
+      "ratio": 0.2278
+    },
+    "employerMatchMaximized": true,
+    "emergency": {
+      "cash": 150800,
+      "monthlyExpenses": 9397.5,
+      "minMonths": 8,
+      "maxMonths": 9,
+      "minAmount": 75180,
+      "maxAmount": 84577.5,
+      "shortfall": 0,
+      "excess": 66222.5
+    },
+    "life": {
+      "people": [
+        {
+          "name": "Timothy",
+          "current": 140000,
+          "minRec": 750000,
+          "maxRec": 1500000,
+          "shortfall": 610000
+        },
+        {
+          "name": "Melanie",
+          "current": 110000,
+          "minRec": 600000,
+          "maxRec": 1200000,
+          "shortfall": 490000
+        }
+      ]
+    },
+    "umbrella": {
+      "has": false,
+      "amount": 0,
+      "recommended": 1000000
+    },
+    "retirement": {
+      "retirementAge": 62,
+      "endOfPlanAge": 91,
+      "runOutAge": null,
+      "gap": 0
+    },
+    "creditCard": {
+      "name": "Chase CC",
+      "balance": 18000,
+      "rate": 0.18
+    },
+    "educationGap": 113508.6
+  },
+  "projections": [
+    {
+      "year": 2026,
+      "age": 40,
+      "netWorth": 712086
+    },
+    {
+      "year": 2027,
+      "age": 41,
+      "netWorth": 823317
+    },
+    {
+      "year": 2028,
+      "age": 42,
+      "netWorth": 945346
+    },
+    {
+      "year": 2029,
+      "age": 43,
+      "netWorth": 1044059
+    },
+    {
+      "year": 2030,
+      "age": 44,
+      "netWorth": 1163031
+    },
+    {
+      "year": 2031,
+      "age": 45,
+      "netWorth": 1307142
+    },
+    {
+      "year": 2032,
+      "age": 46,
+      "netWorth": 1460964
+    },
+    {
+      "year": 2033,
+      "age": 47,
+      "netWorth": 1621060
+    },
+    {
+      "year": 2034,
+      "age": 48,
+      "netWorth": 1790331
+    },
+    {
+      "year": 2035,
+      "age": 49,
+      "netWorth": 1972378
+    },
+    {
+      "year": 2036,
+      "age": 50,
+      "netWorth": 2167951
+    },
+    {
+      "year": 2037,
+      "age": 51,
+      "netWorth": 2377773
+    },
+    {
+      "year": 2038,
+      "age": 52,
+      "netWorth": 2585588
+    },
+    {
+      "year": 2039,
+      "age": 53,
+      "netWorth": 2807491
+    },
+    {
+      "year": 2040,
+      "age": 54,
+      "netWorth": 3042480
+    },
+    {
+      "year": 2041,
+      "age": 55,
+      "netWorth": 3265261
+    },
+    {
+      "year": 2042,
+      "age": 56,
+      "netWorth": 3532509
+    },
+    {
+      "year": 2043,
+      "age": 57,
+      "netWorth": 3817378
+    },
+    {
+      "year": 2044,
+      "age": 58,
+      "netWorth": 4121133
+    },
+    {
+      "year": 2045,
+      "age": 59,
+      "netWorth": 4469226
+    },
+    {
+      "year": 2046,
+      "age": 60,
+      "netWorth": 4841694
+    },
+    {
+      "year": 2047,
+      "age": 61,
+      "netWorth": 5240317
+    },
+    {
+      "year": 2048,
+      "age": 62,
+      "netWorth": 5442180
+    },
+    {
+      "year": 2049,
+      "age": 63,
+      "netWorth": 5553124
+    },
+    {
+      "year": 2050,
+      "age": 64,
+      "netWorth": 5663547
+    },
+    {
+      "year": 2051,
+      "age": 65,
+      "netWorth": 5765563
+    },
+    {
+      "year": 2052,
+      "age": 66,
+      "netWorth": 5862710
+    },
+    {
+      "year": 2053,
+      "age": 67,
+      "netWorth": 6167559
+    },
+    {
+      "year": 2054,
+      "age": 68,
+      "netWorth": 6555401
+    },
+    {
+      "year": 2055,
+      "age": 69,
+      "netWorth": 6991844
+    },
+    {
+      "year": 2056,
+      "age": 70,
+      "netWorth": 7458069
+    },
+    {
+      "year": 2057,
+      "age": 71,
+      "netWorth": 7956228
+    },
+    {
+      "year": 2058,
+      "age": 72,
+      "netWorth": 8488634
+    },
+    {
+      "year": 2059,
+      "age": 73,
+      "netWorth": 9057769
+    },
+    {
+      "year": 2060,
+      "age": 74,
+      "netWorth": 9621762
+    },
+    {
+      "year": 2061,
+      "age": 75,
+      "netWorth": 10070976
+    },
+    {
+      "year": 2062,
+      "age": 76,
+      "netWorth": 10538674
+    },
+    {
+      "year": 2063,
+      "age": 77,
+      "netWorth": 10894736
+    },
+    {
+      "year": 2064,
+      "age": 78,
+      "netWorth": 11251414
+    },
+    {
+      "year": 2065,
+      "age": 79,
+      "netWorth": 11607716
+    },
+    {
+      "year": 2066,
+      "age": 80,
+      "netWorth": 11961193
+    },
+    {
+      "year": 2067,
+      "age": 81,
+      "netWorth": 12310930
+    },
+    {
+      "year": 2068,
+      "age": 82,
+      "netWorth": 12653482
+    },
+    {
+      "year": 2069,
+      "age": 83,
+      "netWorth": 12988685
+    },
+    {
+      "year": 2070,
+      "age": 84,
+      "netWorth": 13311338
+    },
+    {
+      "year": 2071,
+      "age": 85,
+      "netWorth": 13621274
+    },
+    {
+      "year": 2072,
+      "age": 86,
+      "netWorth": 13914178
+    },
+    {
+      "year": 2073,
+      "age": 87,
+      "netWorth": 14188088
+    },
+    {
+      "year": 2074,
+      "age": 88,
+      "netWorth": 14442231
+    },
+    {
+      "year": 2075,
+      "age": 89,
+      "netWorth": 14670470
+    },
+    {
+      "year": 2076,
+      "age": 90,
+      "netWorth": 14874373
+    },
+    {
+      "year": 2077,
+      "age": null,
+      "netWorth": 15334811
+    },
+    {
+      "year": 2078,
+      "age": null,
+      "netWorth": 15957595
+    },
+    {
+      "year": 2079,
+      "age": null,
+      "netWorth": 16115848
+    }
+  ],
+  "market": {
+    "return3yAnnualized": 0.117,
+    "maxDrawdown": -0.0915,
+    "recoveryDays": 37,
+    "worstEvent": {
+      "title": "Liberation Day tariffs announced",
+      "date": "2025-04-02",
+      "drawdown": -0.0711,
+      "recoveryDays": null
+    },
+    "topSector": "Technology",
+    "topSectorPct": 0.3134
+  },
+  "persona": {
+    "concerns": [
+      {
+        "id": "O1",
+        "severity": "SIGNIFICANT",
+        "title": "Life insurance shortfall"
+      },
+      {
+        "id": "O2",
+        "severity": "MODERATE",
+        "title": "High-rate credit card"
+      },
+      {
+        "id": "O3",
+        "severity": "MODERATE",
+        "title": "No umbrella coverage"
+      },
+      {
+        "id": "O4",
+        "severity": "MODERATE",
+        "title": "Education funding unfunded"
+      },
+      {
+        "id": "O5",
+        "severity": "MINOR",
+        "title": "Idle cash"
+      },
+      {
+        "id": "O6",
+        "severity": "MINOR",
+        "title": "Portfolio equity above target and technology concentration"
+      },
+      {
+        "id": "O7",
+        "severity": "MINOR",
+        "title": "Unused contribution limits"
+      }
+    ]
+  }
+}

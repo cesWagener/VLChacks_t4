@@ -1,0 +1,417 @@
+[
+  {
+    "id": "daniel-emily-johnson",
+    "displayName": "Daniel & Emily Johnson",
+    "familyName": "Johnson",
+    "members": [
+      {
+        "firstName": "Daniel",
+        "role": "client",
+        "age": 44
+      },
+      {
+        "firstName": "Emily",
+        "role": "co-client",
+        "age": 42
+      },
+      {
+        "firstName": "Oliver",
+        "role": "child",
+        "age": 11
+      },
+      {
+        "firstName": "Sophia",
+        "role": "child",
+        "age": 9
+      }
+    ],
+    "city": "Denver",
+    "state": "CO",
+    "netWorth": 511000,
+    "investableAssets": 330000,
+    "equityExposure": 186947.38,
+    "score": {
+      "value": 52,
+      "band": "vulnerable",
+      "colour": "red"
+    },
+    "sectorWeights": {
+      "Technology": 0.3563,
+      "Financial Services": 0.1206,
+      "Healthcare": 0.0973,
+      "Communication Services": 0.0885,
+      "Consumer Cyclical": 0.088,
+      "Industrials": 0.0796,
+      "Consumer Defensive": 0.0566,
+      "Energy": 0.0493,
+      "Basic Materials": 0.0264,
+      "Real Estate": 0.0195,
+      "Utilities": 0.0179
+    },
+    "holdings": [
+      {
+        "ticker": "SCHP",
+        "name": "Schwab U.S. TIPS ETF™"
+      },
+      {
+        "ticker": "JNK",
+        "name": "SPDR Bloomberg High Yield Bond ETF"
+      },
+      {
+        "ticker": "FSTDX",
+        "name": "Fidelity Series 5+ Year Inflation-Protected Bond Index Fund"
+      },
+      {
+        "ticker": "SCHD",
+        "name": "Schwab US Dividend Equity ETF"
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard FTSE Emerging Markets ETF"
+      },
+      {
+        "ticker": "LQD",
+        "name": "iShares iBoxx $ Inv Grade Corporate Bond ETF"
+      },
+      {
+        "ticker": "VWELX",
+        "name": "Vanguard Wellington Fund Investor Shares"
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Morningstar Total Stock Market ETF"
+      }
+    ],
+    "goals": [
+      {
+        "name": "Take a vacation",
+        "type": "VACATION",
+        "date": "2027-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "College Oliver",
+        "type": "COLLEGE",
+        "date": "2033-08-01T00:00:00.000Z"
+      },
+      {
+        "name": "College Sophia",
+        "type": "COLLEGE",
+        "date": "2035-08-01T00:00:00.000Z"
+      },
+      {
+        "name": "Emily's Retirement",
+        "type": "RETIREMENT",
+        "date": "2044-05-01T00:00:00.000Z"
+      },
+      {
+        "name": "Daniel's Retirement",
+        "type": "RETIREMENT",
+        "date": "2044-09-01T00:00:00.000Z"
+      }
+    ],
+    "planUrl": "https://app.sherpaswealth.com/plan/shared/FjVPq_UEwSMxaye8aOWj3osJWWSE3cDnYWcxm1X7I78",
+    "simulated": false
+  },
+  {
+    "id": "michael-carter",
+    "displayName": "Michael Carter",
+    "familyName": "Carter",
+    "members": [
+      {
+        "firstName": "Michael",
+        "role": "client",
+        "age": 37
+      }
+    ],
+    "city": "Austin",
+    "state": "TX",
+    "netWorth": 218500,
+    "investableAssets": 145000,
+    "equityExposure": 100986.23,
+    "score": {
+      "value": 26,
+      "band": "critical",
+      "colour": "red"
+    },
+    "sectorWeights": {
+      "Technology": 0.3295,
+      "Financial Services": 0.1269,
+      "Healthcare": 0.1046,
+      "Consumer Cyclical": 0.0848,
+      "Industrials": 0.0832,
+      "Communication Services": 0.0787,
+      "Consumer Defensive": 0.0703,
+      "Energy": 0.0616,
+      "Basic Materials": 0.0262,
+      "Real Estate": 0.0173,
+      "Utilities": 0.0168
+    },
+    "holdings": [
+      {
+        "ticker": "JNK",
+        "name": "SPDR Bloomberg High Yield Bond ETF"
+      },
+      {
+        "ticker": "SCHP",
+        "name": "Schwab U.S. TIPS ETF™"
+      },
+      {
+        "ticker": "SCHD",
+        "name": "Schwab US Dividend Equity ETF"
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard FTSE Emerging Markets ETF"
+      },
+      {
+        "ticker": "FSTDX",
+        "name": "Fidelity Series 5+ Year Inflation-Protected Bond Index Fund"
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Morningstar Total Stock Market ETF"
+      }
+    ],
+    "goals": [
+      {
+        "name": "Take a vacation",
+        "type": "VACATION",
+        "date": "2027-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "Purchase a home",
+        "type": "PURCHASE",
+        "date": "2027-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "Michael's Retirement",
+        "type": "RETIREMENT",
+        "date": "2047-04-01T00:00:00.000Z"
+      }
+    ],
+    "planUrl": "https://app.sherpaswealth.com/plan/shared/ZshH0AUJjZnvwKIYtP5wYKyvI6Nc1nsGwQlDncXLfek",
+    "simulated": false
+  },
+  {
+    "id": "samantha-lewis",
+    "displayName": "Samantha Lewis",
+    "familyName": "Lewis",
+    "members": [
+      {
+        "firstName": "Samantha",
+        "role": "client",
+        "age": 47
+      },
+      {
+        "firstName": "Ethan",
+        "role": "child",
+        "age": 18
+      },
+      {
+        "firstName": "Ava",
+        "role": "child",
+        "age": 16
+      }
+    ],
+    "city": "Miami",
+    "state": "FL",
+    "netWorth": 1395000,
+    "investableAssets": 335000,
+    "equityExposure": 283439.34,
+    "score": {
+      "value": 82,
+      "band": "strong",
+      "colour": "green"
+    },
+    "sectorWeights": {
+      "Technology": 0.3063,
+      "Healthcare": 0.1221,
+      "Financial Services": 0.115,
+      "Consumer Defensive": 0.0914,
+      "Industrials": 0.0832,
+      "Consumer Cyclical": 0.0818,
+      "Energy": 0.0775,
+      "Communication Services": 0.0768,
+      "Basic Materials": 0.0178,
+      "Real Estate": 0.0145,
+      "Utilities": 0.0137
+    },
+    "holdings": [
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Morningstar Total Stock Market ETF"
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard FTSE Emerging Markets ETF"
+      },
+      {
+        "ticker": "SCHD",
+        "name": "Schwab US Dividend Equity ETF"
+      },
+      {
+        "ticker": "JNK",
+        "name": "SPDR Bloomberg High Yield Bond ETF"
+      }
+    ],
+    "goals": [
+      {
+        "name": "Take a vacation",
+        "type": "VACATION",
+        "date": "2027-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "College Ava",
+        "type": "COLLEGE",
+        "date": "2028-08-01T00:00:00.000Z"
+      },
+      {
+        "name": "Purchase a home",
+        "type": "PURCHASE",
+        "date": "2030-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "Samantha's Retirement",
+        "type": "RETIREMENT",
+        "date": "2044-07-01T00:00:00.000Z"
+      }
+    ],
+    "planUrl": "https://app.sherpaswealth.com/plan/shared/vyV2h64-qSet-sJuwkAHxw-iUaYV88Lkwsg29L2Y5y8",
+    "simulated": false
+  },
+  {
+    "id": "timothy-melanie-weah",
+    "displayName": "Timothy & Melanie Weah",
+    "familyName": "Weah",
+    "members": [
+      {
+        "firstName": "Timothy",
+        "role": "client",
+        "age": 40
+      },
+      {
+        "firstName": "Melanie",
+        "role": "co-client",
+        "age": 38
+      },
+      {
+        "firstName": "Liam",
+        "role": "child",
+        "age": 6
+      },
+      {
+        "firstName": "Josh",
+        "role": "child",
+        "age": 3
+      }
+    ],
+    "city": "San Francisco",
+    "state": "CA",
+    "netWorth": 695500,
+    "investableAssets": 210000,
+    "equityExposure": 162473.48,
+    "score": {
+      "value": 60,
+      "band": "stable",
+      "colour": "yellow"
+    },
+    "sectorWeights": {
+      "Technology": 0.2999,
+      "Financial Services": 0.1462,
+      "Industrials": 0.1267,
+      "Healthcare": 0.0938,
+      "Consumer Cyclical": 0.082,
+      "Communication Services": 0.0722,
+      "Consumer Defensive": 0.0555,
+      "Energy": 0.0489,
+      "Basic Materials": 0.0394,
+      "Utilities": 0.0181,
+      "Real Estate": 0.0171
+    },
+    "holdings": [
+      {
+        "ticker": "FCNTX",
+        "name": "Fidelity Contrafund"
+      },
+      {
+        "ticker": "UPRO",
+        "name": "ProShares UltraPro S&P500"
+      },
+      {
+        "ticker": "LQD",
+        "name": "iShares iBoxx $ Inv Grade Corporate Bond ETF"
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard FTSE Emerging Markets ETF"
+      },
+      {
+        "ticker": "SCHD",
+        "name": "Schwab US Dividend Equity ETF"
+      },
+      {
+        "ticker": "VEA",
+        "name": "Vanguard FTSE Developed Markets Index Fund ETF Shares"
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Morningstar Total Stock Market ETF"
+      },
+      {
+        "ticker": "FIGSX",
+        "name": "Fidelity Series International Growth Fund"
+      },
+      {
+        "ticker": "JNK",
+        "name": "SPDR Bloomberg High Yield Bond ETF"
+      },
+      {
+        "ticker": "SCHP",
+        "name": "Schwab U.S. TIPS ETF™"
+      },
+      {
+        "ticker": "VWELX",
+        "name": "Vanguard Wellington Fund Investor Shares"
+      }
+    ],
+    "goals": [
+      {
+        "name": "Go on vacation",
+        "type": "VACATION",
+        "date": "2027-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "Purchase a vehicle",
+        "type": "PURCHASE",
+        "date": "2028-07-01T00:00:00.000Z"
+      },
+      {
+        "name": "Purchase a home",
+        "type": "PURCHASE",
+        "date": "2030-01-01T00:00:00.000Z"
+      },
+      {
+        "name": "College Liam",
+        "type": "COLLEGE",
+        "date": "2038-08-01T00:00:00.000Z"
+      },
+      {
+        "name": "College Josh",
+        "type": "COLLEGE",
+        "date": "2041-08-01T00:00:00.000Z"
+      },
+      {
+        "name": "Melanie's Retirement",
+        "type": "RETIREMENT",
+        "date": "2048-03-01T00:00:00.000Z"
+      },
+      {
+        "name": "Timothy's Retirement",
+        "type": "RETIREMENT",
+        "date": "2048-04-01T00:00:00.000Z"
+      }
+    ],
+    "planUrl": "https://app.sherpaswealth.com/plan/shared/RcCtgoNkGmD6dvGtYVKWLGefdCTFdc4JP_jH9Jbz2jo",
+    "simulated": false
+  }
+]
