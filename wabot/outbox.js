@@ -11,6 +11,7 @@
 import http from "node:http";
 import crypto from "node:crypto";
 import os from "node:os";
+import { guardarContexto } from "./contexto.js";
 import { fileURLToPath } from "node:url";
 
 // Reads the repo-root .env (OUTBOX_SECRET, OUTBOX_ALLOWED...) so `node index.js` works as before.
@@ -69,7 +70,7 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
           raw += chunk;
           if (raw.length > 16 * 1024) return responder(res, 413, { error: "Demasiado grande" });
         }
-        const { to, text } = JSON.parse(raw || "{}");
+        const { to, text, clientId, subject } = JSON.parse(raw || "{}");
         const jid = toJid(to ?? "");
         if (!permitidos.has(jid)) return responder(res, 403, { error: "Destinatario no permitido (OUTBOX_ALLOWED)" });
         if (typeof text !== "string" || !text.trim() || text.length > MAX_TEXT) return responder(res, 400, { error: "Texto vacío o demasiado largo" });
@@ -82,7 +83,11 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
         if (!sock?.user) return responder(res, 503, { error: "El bot no está conectado a WhatsApp" });
         recientes.push(ahora);
         await enviar(sock, jid, text);
-        console.log("OUTBOX ENVIADO ✅", jid);
+        // Remember which family this chat is about, so ai.js can answer the reply with their plan.
+        if (typeof clientId === "string" && /^[a-z0-9-]{1,80}$/.test(clientId)) {
+          guardarContexto(jid, { clientId, subject: typeof subject === "string" ? subject : "", text, at: new Date().toISOString() });
+        }
+        console.log("OUTBOX ENVIADO ✅", jid, clientId ?? "");
         return responder(res, 200, { ok: true });
       }
 

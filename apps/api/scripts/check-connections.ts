@@ -106,7 +106,7 @@ await step("outbox /health", async () => {
   if (!url || !secret || !process.env.WHATSAPP_DEMO_TO) { warn("outbox /health", "OUTBOX_URL, OUTBOX_SECRET or WHATSAPP_DEMO_TO missing in .env"); return; }
   let r: Response;
   try { r = await fetch(`${url}/health`, { headers: { "X-Outbox-Secret": secret }, signal: AbortSignal.timeout(5_000) }); }
-  catch { warn("outbox /health", `bot not reachable at ${url}. It runs on Ches's laptop: OUTBOX_URL must be its tunnel address (https://….trycloudflare.com), with the bot and the tunnel running.`); return; }
+  catch { bad("outbox /health", `bot not reachable at ${url}. It runs on Ches's laptop: OUTBOX_URL must be its tunnel address (https://….trycloudflare.com), with the bot and the tunnel running.`); return; }
   if (r.status === 401) throw new Error("secret rejected: OUTBOX_SECRET differs between this .env and the bot's .env");
   const j: any = await r.json().catch(() => ({}));
   if (!j.connected) bad("outbox /health", "bot reachable, but not logged in to WhatsApp (scan the QR)");

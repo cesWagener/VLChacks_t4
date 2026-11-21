@@ -27,3 +27,7 @@ apps/whatsapp-bot/auth_backup/
 # Raw key notes: copy values into .env, keep the notes out of git
 docs/keys_enviroment.txt
 *keys*.txt
+
+# WhatsApp bot: which family each chat is about (local state)
+wabot/contexto.json
+

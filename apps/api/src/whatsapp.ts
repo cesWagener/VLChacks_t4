@@ -79,7 +79,7 @@ export async function sendApprovedMessage(input: SendInput) {
   const text = `${subject ? `*${subject}*\n\n` : ""}${body}`;
   if (text.length > 4000) throw new ApiError("The message is too long for WhatsApp (4,000 characters max).", 400);
 
-  const r = await outbox("/send", { method: "POST", body: JSON.stringify({ to: c.to, text }) });
+  const r = await outbox("/send", { method: "POST", body: JSON.stringify({ to: c.to, text, clientId: plan.id, subject }) });
   const j: any = await r.json().catch(() => ({}));
   if (r.status === 401) throw new ApiError("The bot rejected the secret: OUTBOX_SECRET must be identical in your .env and in Ches's .env.", 502);
   if (r.status === 503) throw new ApiError("The bot is running but not logged in to WhatsApp. Ches should check the bot's terminal (QR code).", 503);

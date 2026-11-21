@@ -39,7 +39,7 @@ const IGNORAR = new Set([
 ]);
 
 const MAX_HISTORIAL = 10; // mensajes recordados por contacto
-const TIMEOUT_IA_MS = 20000;
+const TIMEOUT_IA_MS = 45000; // gpt-5-mini puede tardar 5-20 s en responder
 
 // ─────────────────────────── Utilidades ───────────────────────────
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

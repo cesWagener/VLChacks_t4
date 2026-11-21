@@ -57,6 +57,7 @@ On a family's page, once the advisor approves the message, **Send via WhatsApp**
   cloudflared tunnel --url http://localhost:8788  # prints https://<random>.trycloudflare.com
   ```
   Put that address in `OUTBOX_URL` in the `.env` of the laptop running the API. The API re-reads it on every send, so no restart is needed. The address changes each time the tunnel restarts. On a network where laptops can reach each other, `OUTBOX_URL=http://<bot-laptop-ip>:8788` also works; the bot prints that line when it starts.
+- **Replies:** when the client answers on WhatsApp, the bot replies with the AI (`wabot/ai.js`, `gpt-5-mini` through the proxy). It uses only that family's plan (`apps/web/public/plans/<id>.json`) and the last message the advisor sent. Each send records which family a chat is about (`wabot/contexto.json`, git-ignored). The bot's laptop needs `TEAM_KEY` and `LLM_PROXY_URL` in its `.env`, from the "For your backend" block on the access page.
 - **Check it:** run `npm run api:check`. Check 5 reports whether the bot is reachable and logged in to WhatsApp.
 
 ## Limits
