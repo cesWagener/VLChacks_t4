@@ -23,7 +23,7 @@ npm run serve          # builds the web app, starts the server (port 8787) and t
 ```
 
 1. On the first run, scan the QR code shown in the terminal from WhatsApp (Settings, Linked devices). The login is saved in `apps/whatsapp-bot/auth/` (git-ignored).
-2. In a second terminal, publish the app: `cloudflared tunnel --url http://localhost:8787`. It prints `https://<random>.trycloudflare.com`.
+2. In a second terminal, publish the app: `cloudflared tunnel --url http://127.0.0.1:8787`. It prints `https://<random>.trycloudflare.com`.
 3. Anyone on the team opens that address on any device and logs in with `APP_PASSWORD`. They approve a message and click **Send via WhatsApp**. The message goes to `WHATSAPP_DEMO_TO`, and the bot answers the client's replies with the AI.
 
 The bot's outbox listens only on `127.0.0.1` and is never exposed. Only the app's address is public, behind the password. The tunnel address changes when the tunnel restarts. The families are fictional, so messages go only to the team's demo phone.

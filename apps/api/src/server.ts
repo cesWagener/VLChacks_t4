@@ -127,7 +127,22 @@ const server = createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, HOST, () => {
-  const web = existsSync(join(WEB_DIST, "index.html")) ? "web app served" : "web app not built (npm run web:build)";
-  console.log(`Server on http://${HOST}:${PORT}  (AI: ${llmConfigured() ? `${MODEL} via proxy` : "TEAM_KEY missing"}; ${web}; password: ${authRequired() ? "on" : "OFF"})`);
+// "localhost" can mean 127.0.0.1 or ::1 depending on the machine; tunnels (cloudflared) often try ::1 first
+// and answer 502 when nothing listens there. With the default loopback HOST, listen on BOTH addresses.
+const web = existsSync(join(WEB_DIST, "index.html")) ? "web app served" : "web app not built (npm run web:build)";
+const status = `(AI: ${llmConfigured() ? `${MODEL} via proxy` : "TEAM_KEY missing"}; ${web}; password: ${authRequired() ? "on" : "OFF"})`;
+const loopback = HOST === "127.0.0.1" || HOST === "localhost";
+
+server.on("error", (e: NodeJS.ErrnoException) => {
+  console.error(e.code === "EADDRINUSE"
+    ? `Port ${PORT} is already in use on ${HOST}. Stop the other server (or set PORT) and try again.`
+    : `Server error: ${e.message}`);
+  process.exit(1);
+});
+server.listen(PORT, loopback ? "127.0.0.1" : HOST, () => {
+  console.log(`Server on http://${loopback ? "127.0.0.1" : HOST}:${PORT}  ${status}`);
+  if (!loopback) return;
+  const v6 = createServer(server.listeners("request")[0] as Parameters<typeof createServer>[1]);
+  v6.on("error", () => { /* no IPv6 on this machine: IPv4 is enough */ });
+  v6.listen(PORT, "::1", () => console.log(`Server also on http://[::1]:${PORT} (IPv6 localhost)`));
 });
