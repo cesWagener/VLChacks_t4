@@ -84,6 +84,8 @@ export async function sendApprovedMessage(input: SendInput) {
   const j: any = await r.json().catch(() => ({}));
   if (r.status === 401) throw new ApiError("The bot rejected the secret: OUTBOX_SECRET must be identical in your .env and in Ches's .env.", 502);
   if (r.status === 503) throw new ApiError("The bot is running but not logged in to WhatsApp. Ches should check the bot's terminal (QR code).", 503);
+  if (r.status === 403) throw new ApiError(`${j.error ?? "Recipient not allowed."} Set WHATSAPP_DEMO_TO to the demo phone (e.g. 34600111222, country code + number) and restart npm run serve.`, 502);
+  if (r.status === 502) throw new ApiError(`${j.error ?? "WhatsApp could not deliver the message."} Check WHATSAPP_DEMO_TO: a phone number with country code (e.g. 34600111222) is the most reliable.`, 502);
   if (!r.ok) throw new ApiError(`The WhatsApp bot refused the message: ${j.error ?? `HTTP ${r.status}`}`, r.status === 429 ? 429 : 502);
   return { sent: true, to: maskRecipient(c.to), family: plan.displayName, at: new Date().toISOString() };
 }

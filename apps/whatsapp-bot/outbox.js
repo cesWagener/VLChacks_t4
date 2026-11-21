@@ -68,7 +68,10 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
         }
         const { to, text, clientId, subject } = JSON.parse(raw || "{}");
         const jid = toJid(to ?? "");
-        if (!permitidos.has(jid)) return responder(res, 403, { error: "Destinatario no permitido (OUTBOX_ALLOWED)" });
+        if (!permitidos.has(jid)) {
+          console.error(`OUTBOX: destinatario ${jid} no permitido. Permitidos: ${[...permitidos].join(", ")}`);
+          return responder(res, 403, { error: `Recipient ${jid} is not in the bot's allowed list (${[...permitidos].join(", ")}).` });
+        }
         if (typeof text !== "string" || !text.trim() || text.length > MAX_TEXT) return responder(res, 400, { error: "Texto vacío o demasiado largo" });
 
         const ahora = Date.now();
@@ -78,7 +81,13 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
         const sock = getSock();
         if (!sock?.user) return responder(res, 503, { error: "El bot no está conectado a WhatsApp" });
         recientes.push(ahora);
-        await enviar(sock, jid, text);
+        try {
+          await enviar(sock, jid, text);
+        } catch (err) {
+          // WhatsApp itself refused: say why, so the web app can show it.
+          console.error("ERROR OUTBOX al enviar a", jid, err);
+          return responder(res, 502, { error: `WhatsApp could not deliver to ${jid}: ${err?.message ?? err}` });
+        }
         // Remember which family this chat is about, so ai.js can answer the reply with their plan.
         if (typeof clientId === "string" && /^[a-z0-9-]{1,80}$/.test(clientId)) {
           guardarContexto(jid, { clientId, subject: typeof subject === "string" ? subject : "", text, at: new Date().toISOString() });
@@ -90,7 +99,7 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
       responder(res, 404, { error: "No encontrado" });
     } catch (err) {
       console.error("ERROR OUTBOX:", err);
-      responder(res, 500, { error: "Error al enviar" });
+      responder(res, 500, { error: `Outbox error: ${err?.message ?? err}` });
     }
   });
 

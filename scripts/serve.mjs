@@ -27,7 +27,9 @@ if (major < 22 || (major === 22 && minor < 6)) fail(`Node ${process.versions.nod
 try { process.loadEnvFile(path.join(root, ".env")); } catch { /* no .env: use the environment */ }
 if (!process.env.APP_PASSWORD) fail("Set APP_PASSWORD in .env (or the environment). Once the app is public, it is the only thing stopping strangers from sending WhatsApp messages and spending the AI budget.");
 if (!process.env.TEAM_KEY) console.warn("⚠ TEAM_KEY is not set: AI rewrite and AI replies on WhatsApp will not work.");
-if (!process.env.WHATSAPP_DEMO_TO) fail("Set WHATSAPP_DEMO_TO in .env: the team's demo phone that receives the messages.");
+const demoTo = (process.env.WHATSAPP_DEMO_TO || "").trim();
+if (!demoTo) fail("Set WHATSAPP_DEMO_TO in .env: the team's demo phone that receives the messages (country code + number, e.g. 34600111222).");
+if (demoTo === "34600111222") fail("WHATSAPP_DEMO_TO is still the example value from .env.example. Put the team's demo phone (country code + number) in .env.");
 
 const port = process.env.PORT || "8787";
 const outboxPort = process.env.OUTBOX_PORT || "8788";
@@ -40,6 +42,11 @@ const env = {
   OUTBOX_URL: `http://127.0.0.1:${outboxPort}`,
   OUTBOX_SECRET: process.env.OUTBOX_SECRET || randomBytes(24).toString("hex"),
   OUTBOX_FROM_ENV: "1",
+  // The server only ever sends to WHATSAPP_DEMO_TO, so that is exactly what the bot's outbox accepts.
+  // (Without this, the outbox falls back to the bot's ALLOWED list, which may name another chat.)
+  OUTBOX_ALLOWED: demoTo,
+  // The bot answers replies only from ALLOWED chats: make sure the demo phone is one of them.
+  ALLOWED: [...new Set([...(process.env.ALLOWED || "89653264785495@lid").split(","), demoTo].map((s) => s.trim()).filter(Boolean))].join(","),
 };
 
 if (process.env.SERVE_BUILD !== "0") {
