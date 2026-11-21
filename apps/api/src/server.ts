@@ -24,7 +24,7 @@ import { rewriteMessage } from "./rewrite.ts";
 import { maskRecipient, registerPhone, sendApprovedMessage, whatsappStatus } from "./whatsapp.ts";
 import { allPhones, setPhone } from "./phones.ts";
 import { loadPlan } from "./rewrite.ts";
-import { authRequired, isAuthenticated, login, logoutCookie } from "./auth.ts";
+import { authRequired, demoPassword, isAuthenticated, login, logoutCookie } from "./auth.ts";
 
 const PORT = Number(process.env.PORT ?? process.env.API_PORT ?? 8787);
 const HOST = process.env.HOST ?? process.env.API_HOST ?? "127.0.0.1";
@@ -93,7 +93,7 @@ const server = createServer(async (req, res) => {
 
     // Open endpoints
     if (req.method === "GET" && path === "/api/health") return send(res, 200, { ok: true, ai: llmConfigured(), model: MODEL });
-    if (req.method === "GET" && path === "/api/session") return send(res, 200, { required: authRequired(), authenticated: isAuthenticated(req) });
+    if (req.method === "GET" && path === "/api/session") return send(res, 200, { required: authRequired(), authenticated: isAuthenticated(req), demoPassword: demoPassword() });
     if (req.method === "POST" && path === "/api/login") {
       requireJson(req);
       const body = await readJson(req);

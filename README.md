@@ -80,7 +80,7 @@ npm run serve          # builds the web app, starts the server and the WhatsApp 
 ```
 
 1. Scan the QR code in the terminal with the bot's WhatsApp (Settings, Linked devices).
-2. Publish the app: `cloudflared tunnel --url http://127.0.0.1:8787`, then open the `https://….trycloudflare.com` address on any device and log in with `APP_PASSWORD`.
+2. Publish the app: `cloudflared tunnel --url http://127.0.0.1:8787`, then open the `https://….trycloudflare.com` address on any device and log in with `APP_PASSWORD`. For the jury, set `APP_PASSWORD=1234` and `SHOW_PASSWORD_ON_LOGIN=1`, and the login page shows the password. Turn that off and stop the tunnel after the demo.
 3. On each family's page, set **"WhatsApp number for this family"**: one test phone per family. Messages go there, and its replies are answered as that family.
 
 `npm run api:check` checks every connection: keys, AI proxy, MCP server, server and bot. For local development, run `npm run api` and `npm run web` separately. Details are in each app's README: [`apps/web`](apps/web), [`apps/api`](apps/api), [`apps/whatsapp-bot`](apps/whatsapp-bot).

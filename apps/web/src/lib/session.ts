@@ -4,7 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 
 export const UNAUTHORIZED_EVENT = "app:unauthorized";
 
-type Session = { status: "loading" } | { status: "ready"; required: boolean; authenticated: boolean };
+// demoPassword: shown on the login page only when the server sets SHOW_PASSWORD_ON_LOGIN=1 (demos).
+type Session = { status: "loading" } | { status: "ready"; required: boolean; authenticated: boolean; demoPassword?: string | null };
 
 export function useSession() {
   const [session, setSession] = useState<Session>({ status: "loading" });
@@ -13,7 +14,12 @@ export function useSession() {
     try {
       const res = await fetch("/api/session", { signal: AbortSignal.timeout(8_000) });
       const data = res.ok ? await res.json() : null;
-      setSession({ status: "ready", required: Boolean(data?.required), authenticated: Boolean(data?.authenticated) });
+      setSession({
+        status: "ready",
+        required: Boolean(data?.required),
+        authenticated: Boolean(data?.authenticated),
+        demoPassword: typeof data?.demoPassword === "string" ? data.demoPassword : null,
+      });
     } catch {
       setSession({ status: "ready", required: false, authenticated: true }); // no server: static app only
     }

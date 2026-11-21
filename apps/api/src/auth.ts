@@ -12,6 +12,10 @@ const attempts = new Map<string, number[]>();
 const password = () => process.env.APP_PASSWORD ?? "";
 export const authRequired = () => password().length > 0;
 
+/** For a demo (e.g. a jury): SHOW_PASSWORD_ON_LOGIN=1 prints the password on the login page.
+ *  Anyone with the link can then use the app, so turn it off (and stop the tunnel) after the demo. */
+export const demoPassword = () => (process.env.SHOW_PASSWORD_ON_LOGIN === "1" && authRequired() ? password() : null);
+
 // Sessions are signed with a key derived from the password, so changing the password logs everyone out,
 // and a restart does not.
 const sign = (payload: string) => createHmac("sha256", `sherpas-session:${password()}`).update(payload).digest("base64url");

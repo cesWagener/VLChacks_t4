@@ -20,7 +20,7 @@ export function App() {
   }, [known]);
 
   if (session.status === "loading") return null;
-  if (session.required && !session.authenticated) return <LoginPage onLogin={login} />;
+  if (session.required && !session.authenticated) return <LoginPage onLogin={login} demoPassword={session.demoPassword} />;
 
   return (
     <LogoutContext.Provider value={session.required ? () => void logout() : null}>

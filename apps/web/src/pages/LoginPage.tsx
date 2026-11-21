@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 
 /** Shown when the server requires APP_PASSWORD and there is no valid session. */
-export function LoginPage({ onLogin }: { onLogin: (password: string) => Promise<void> }) {
+export function LoginPage({ onLogin, demoPassword }: { onLogin: (password: string) => Promise<void>; demoPassword?: string | null }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -22,6 +22,11 @@ export function LoginPage({ onLogin }: { onLogin: (password: string) => Promise<
         <p className="login__brand">sherpas</p>
         <h1 className="login__title">Advisor console</h1>
         <p className="login__text">Enter the team password to continue.</p>
+        {demoPassword && (
+          <p className="login__demo" role="note">
+            Demo access: the password is <strong>{demoPassword}</strong>
+          </p>
+        )}
         <label className="field">
           <span className="field__label">Password</span>
           <input

@@ -481,3 +481,7 @@ a { color: var(--accent); }
 .family-phone__row { display: flex; gap: 8px; align-items: center; margin-top: 4px; flex-wrap: wrap; }
 .family-phone__input { max-width: 240px; }
 .family-phone__hint { margin: 6px 0 0; font-size: 12px; color: var(--text-muted); }
+
+.login__demo { margin: 0 0 16px; padding: 10px 12px; border-radius: var(--radius-input); background: var(--accent-soft); color: var(--text); font-size: 14px; }
+.login__demo strong { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
