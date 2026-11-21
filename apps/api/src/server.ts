@@ -5,6 +5,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { LlmError, MODEL, llmConfigured } from "./llm.ts";
 import { rewriteMessage } from "./rewrite.ts";
+import { sendApprovedMessage, whatsappStatus } from "./whatsapp.ts";
 
 const PORT = Number(process.env.API_PORT ?? 8787);
 const HOST = process.env.API_HOST ?? "127.0.0.1";
@@ -32,6 +33,16 @@ const server = createServer(async (req, res) => {
   try {
     if (req.method === "GET" && url.pathname === "/api/health") {
       return send(res, 200, { ok: true, ai: llmConfigured(), model: MODEL });
+    }
+    if (req.method === "GET" && url.pathname === "/api/whatsapp/status") {
+      return send(res, 200, await whatsappStatus());
+    }
+    if (req.method === "POST" && url.pathname === "/api/messages/send") {
+      if (!(req.headers["content-type"] ?? "").includes("application/json")) throw new LlmError("Send JSON.", 415);
+      const body = await readJson(req);
+      const result = await sendApprovedMessage(body);
+      console.log(`whatsapp sent ${body.clientId} to ${result.to}`);
+      return send(res, 200, result);
     }
     if (req.method === "POST" && url.pathname === "/api/messages/rewrite") {
       if (!(req.headers["content-type"] ?? "").includes("application/json")) throw new LlmError("Send JSON.", 415);

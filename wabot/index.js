@@ -11,6 +11,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { responder } from "./ai.js";
+import { iniciarOutbox } from "./outbox.js"; // envíos aprobados desde la web (ver outbox.js)
 
 // ─────────────────────────── Configuración ───────────────────────────
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -120,6 +121,7 @@ async function start() {
     if (connection === "open") {
       console.log("Conectado ✅");
       iniciarTerminal();
+      iniciarOutbox({ getSock: () => sockActual, enviar, allowed: ALLOWED });
     }
 
     if (connection === "close") {

@@ -458,3 +458,8 @@ a { color: var(--accent); }
 
 .proposal__error { margin: 10px 0 0; font-size: 13px; color: #B23434; background: #FBE3E3; border-radius: var(--radius-input); padding: 8px 12px; }
 
+
+.button--whatsapp { background: #1FA855; border-color: #1FA855; }
+.button--whatsapp:hover { background: #17904A; }
+.button--whatsapp:disabled { opacity: .7; cursor: progress; }
+.proposal__sent { margin: 10px 0 0; font-size: 13px; color: #17804A; background: #E3F5EA; border-radius: var(--radius-input); padding: 8px 12px; }

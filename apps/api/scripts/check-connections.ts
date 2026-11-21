@@ -99,5 +99,19 @@ await step("API /api/health", async () => {
   else ok("API /api/health", `running, AI on ${j.model}`);
 });
 
+console.log("\n5. WhatsApp bot outbox (wabot/outbox.js)");
+await step("outbox /health", async () => {
+  const url = (process.env.OUTBOX_URL ?? "").replace(/\/+$/, "");
+  const secret = process.env.OUTBOX_SECRET ?? "";
+  if (!url || !secret || !process.env.WHATSAPP_DEMO_TO) { warn("outbox /health", "OUTBOX_URL, OUTBOX_SECRET or WHATSAPP_DEMO_TO missing in .env"); return; }
+  let r: Response;
+  try { r = await fetch(`${url}/health`, { headers: { "X-Outbox-Secret": secret }, signal: AbortSignal.timeout(5_000) }); }
+  catch { warn("outbox /health", `bot not reachable at ${url}. Is it running, with OUTBOX_SECRET set, on the same network?`); return; }
+  if (r.status === 401) throw new Error("secret rejected: OUTBOX_SECRET differs between this .env and the bot's .env");
+  const j: any = await r.json().catch(() => ({}));
+  if (!j.connected) bad("outbox /health", "bot reachable, but not logged in to WhatsApp (scan the QR)");
+  else ok("outbox /health", `bot reachable at ${url} and connected to WhatsApp`);
+});
+
 console.log(failed ? `\n${failed} check(s) FAILED\n` : "\nALL CONNECTIONS OK\n");
 process.exit(failed ? 1 : 0);

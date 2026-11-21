@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PlanData } from "../../lib/plan.ts";
 import { TONES, draftMessage, type Tone } from "../../lib/message.ts";
-import { rewriteWithAI } from "../../lib/api.ts";
+import { rewriteWithAI, sendViaWhatsApp } from "../../lib/api.ts";
 
 const STORAGE_PREFIX = "sherpas.proposedMessage.v1.";
 
@@ -13,6 +13,7 @@ interface Saved {
   edited: boolean;
   approved: boolean;
   aiWritten?: boolean;        // current text came from "Rewrite with AI"
+  sentAt?: string | null;     // when this exact text was sent on WhatsApp
 }
 
 function readSaved(id: string): Saved | null {
@@ -48,6 +49,8 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
   const [approved, setApproved] = useState(saved?.approved ?? false);
   const [copied, setCopied] = useState(false);
   const [aiWritten, setAiWritten] = useState(saved?.aiWritten ?? false);
+  const [sentAt, setSentAt] = useState<string | null>(saved?.sentAt ?? null);
+  const [sending, setSending] = useState<{ status: "idle" | "sending" | "error"; message?: string }>({ status: "idle" });
   const [ai, setAi] = useState<{ status: "idle" | "loading" | "error"; message?: string }>({ status: "idle" });
   const bodyRef = useRef<HTMLTextAreaElement>(null);
 
@@ -57,9 +60,11 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
   }, [draft, edited]);
 
   useEffect(() => {
-    const s: Saved = { tone, issueKeys, subject, body, edited, approved, aiWritten };
+    const s: Saved = { tone, issueKeys, subject, body, edited, approved, aiWritten, sentAt };
     try { localStorage.setItem(STORAGE_PREFIX + plan.id, JSON.stringify(s)); } catch { /* storage blocked */ }
-  }, [plan.id, tone, issueKeys, subject, body, edited, approved, aiWritten]);
+  }, [plan.id, tone, issueKeys, subject, body, edited, approved, aiWritten, sentAt]);
+  // Any change to the text or the approval means the sent copy is no longer this one.
+  useEffect(() => { if (!approved) setSentAt(null); }, [approved]);
 
   // Grow the textarea with its content so the whole message is readable without inner scrolling.
   useEffect(() => {
@@ -69,6 +74,16 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
 
   const regenerate = () => { setEdited(false); setAiWritten(false); setApproved(false); setSubject(draft.subject); setBody(draft.body); };
   const onEdit = (fn: () => void) => { fn(); setEdited(true); setAiWritten(false); setApproved(false); };
+  const send = async () => {
+    setSending({ status: "sending" });
+    try {
+      const r = await sendViaWhatsApp({ clientId: plan.id, subject, body });
+      setSentAt(r.at);
+      setSending({ status: "idle" });
+    } catch (e) {
+      setSending({ status: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  };
   // Rewrites the current draft with the AI (through our backend). Same tone and topics; facts come from the plan.
   const rewrite = async () => {
     if (edited && !aiWritten && !window.confirm("Replace your edits with an AI rewrite?")) return;
@@ -114,7 +129,7 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
         </div>
         <div className="proposal__status">
           <span className={`tone-pill tone-pill--${draft.tone}`}>{TONES.find(t => t.id === draft.tone)!.label.replace(/\s*\(.*\)$/, "")} tone</span>
-          <span className="status-pill" data-approved={approved || undefined}>{approved ? "Approved" : aiWritten ? "AI draft" : edited ? "Edited draft" : "Draft"}</span>
+          <span className="status-pill" data-approved={approved || undefined}>{sentAt ? "Sent on WhatsApp" : approved ? "Approved" : aiWritten ? "AI draft" : edited ? "Edited draft" : "Draft"}</span>
         </div>
       </header>
 
@@ -134,6 +149,17 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
             ) : (
               <button type="button" className="button" onClick={() => setApproved(true)}>Approve message</button>
             )}
+            {approved && (
+              <button
+                type="button"
+                className="button button--whatsapp"
+                onClick={send}
+                disabled={sending.status === "sending"}
+                aria-busy={sending.status === "sending"}
+              >
+                {sending.status === "sending" ? "Sending…" : sentAt ? "Send again on WhatsApp" : "Send via WhatsApp"}
+              </button>
+            )}
             <button type="button" className="button button--ghost" onClick={rewrite} disabled={ai.status === "loading"} aria-busy={ai.status === "loading"}>
               {ai.status === "loading" ? "Writing with AI…" : aiWritten ? "Rewrite again with AI" : "Rewrite with AI"}
             </button>
@@ -141,8 +167,10 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
             {edited && <button type="button" className="link-button" onClick={regenerate}>Back to the standard draft</button>}
           </div>
           {ai.status === "error" && <p className="proposal__error" role="alert">{ai.message} The standard draft is still here.</p>}
+          {sending.status === "error" && <p className="proposal__error" role="alert">{sending.message}</p>}
+          {sentAt && <p className="proposal__sent" role="status">Sent on WhatsApp at {new Date(sentAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} to the team's demo phone.</p>}
           <p className="proposal__note">
-            Nothing is sent from here. Once approved, copy it into your usual channel.
+            Approve it to send it on WhatsApp. The families are fictional, so it goes to the team's demo phone, never to a real client.
             {aiWritten && " AI drafts use only facts from the plan, but read them before approving."}
           </p>
         </div>

@@ -22,6 +22,8 @@ npm run web        # web app at http://localhost:5173/clients
 npm run bot        # WhatsApp bot (scan the QR on first run)
 ```
 
+**Sending on WhatsApp:** approve a proposed message in the web app, then click **Send via WhatsApp**. It goes web app, then API, then the bot (`wabot/outbox.js`), then WhatsApp, and only to the team's demo phone (`WHATSAPP_DEMO_TO`). The API and the bot need the same `OUTBOX_SECRET` in their `.env`. If the bot runs on another laptop, set `OUTBOX_URL` to that laptop's address. Details in [`apps/api`](apps/api#sending-on-whatsapp).
+
 Secrets stay local and git-ignored: `.env` (AI and MCP keys) and the WhatsApp login (`apps/whatsapp-bot/auth/`). Keys are only read by the backend, never by browser code. Each app's README has the details.
 
 ---

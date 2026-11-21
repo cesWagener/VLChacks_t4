@@ -42,6 +42,18 @@ Read from the repo-root `.env` (git-ignored). `.env.example` lists the variables
 
 `/api/messages/rewrite` builds the rule-based draft on the server, from the family's plan (`apps/web/public/plans/<id>.json`), using the same code as the web app (`apps/web/src/lib/message.ts`). It then asks the model to make it sound personal. The model gets only facts from the plan, plus rules: use no other numbers, make no guarantees, recommend no products. The browser can only choose the family, the tone and the topics. It cannot send facts or instructions.
 
+| GET | `/api/whatsapp/status` | | `{ configured, reachable, connected, recipient }` |
+| POST | `/api/messages/send` | `{ clientId, subject, body }` | `{ sent, to, family, at }` |
+
+## Sending on WhatsApp
+
+On a family's page, once the advisor approves the message, **Send via WhatsApp** appears. The message travels web app, then this API (`POST /api/messages/send`), then the team's bot (`wabot/outbox.js`, `POST /send`), which sends it through the bot's own WhatsApp session.
+
+- **Recipient:** always `WHATSAPP_DEMO_TO` from `.env`. The four families are fictional, so messages go to the team's demo phone, never to a real client. The bot double-checks this: it only sends to numbers in `OUTBOX_ALLOWED`, or else in its `ALLOWED` list.
+- **Shared secret:** the API and the bot must have the same `OUTBOX_SECRET` in their `.env`. Without it, the outbox stays off.
+- **Bot on another laptop:** the bot listens on port 8788 of the laptop it runs on. On the laptop running the API, set `OUTBOX_URL=http://<bot-laptop-ip>:8788` (same Wi-Fi). Run `ipconfig` on Windows or `ipconfig getifaddr en0` on macOS to find the IP.
+- **Check it:** run `npm run api:check`. Check 5 reports whether the bot is reachable and logged in to WhatsApp.
+
 ## Limits
 
 The server allows at most 3 AI calls at once and 20 a minute, below the team limits (4 and 60), because teammates share the key. One rewrite costs about 1,700 tokens with `gpt-5-mini`, well under a cent. To check what the team has spent, see the challenge README ("Check your AI credits").

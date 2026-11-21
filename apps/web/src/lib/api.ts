@@ -20,3 +20,23 @@ export async function rewriteWithAI(input: { clientId: string; tone?: Tone; issu
   if (!res.ok) throw new Error(data?.error ?? `The AI service answered ${res.status}.`);
   return data as RewriteResult;
 }
+
+export interface SendResult { sent: true; to: string; family: string; at: string }
+
+/** Sends the approved message through the team's WhatsApp bot (via our API). Recipient is the demo phone set in .env. */
+export async function sendViaWhatsApp(input: { clientId: string; subject: string; body: string }): Promise<SendResult> {
+  let res: Response;
+  try {
+    res = await fetch("/api/messages/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+      signal: AbortSignal.timeout(30_000),
+    });
+  } catch {
+    throw new Error("The API isn't reachable. Is it running (npm run api)?");
+  }
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.error ?? `Sending failed (HTTP ${res.status}).`);
+  return data as SendResult;
+}
