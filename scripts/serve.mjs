@@ -25,7 +25,11 @@ const [major, minor] = process.versions.node.split(".").map(Number);
 if (major < 22 || (major === 22 && minor < 6)) fail(`Node ${process.versions.node} is too old. Install Node 22.6 or later (e.g. nvm install 22), then run npm run serve again.`);
 
 try { process.loadEnvFile(path.join(root, ".env")); } catch { /* no .env: use the environment */ }
-if (!process.env.APP_PASSWORD) fail("Set APP_PASSWORD in .env (or the environment). Once the app is public, it is the only thing stopping strangers from sending WhatsApp messages and spending the AI budget.");
+// Demo default: password "1234", shown on the login page (SHOW_PASSWORD_ON_LOGIN=0 hides it).
+if (!process.env.APP_PASSWORD) {
+  process.env.APP_PASSWORD = "1234";
+  console.log("ℹ APP_PASSWORD not set: using the demo password 1234 (shown on the login page).");
+}
 if (!process.env.TEAM_KEY) console.warn("⚠ TEAM_KEY is not set: AI rewrite and AI replies on WhatsApp will not work.");
 // Each family can have its own test phone (set on its page in the app). WHATSAPP_DEMO_TO is the fallback.
 const demoTo = (process.env.WHATSAPP_DEMO_TO || "").trim();
