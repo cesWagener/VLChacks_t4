@@ -23,6 +23,7 @@ An advisor looks after around 150 families, and each one wants to feel like the 
 1. **See the whole book at a glance.** A Clients view of every family: search by name, child, city, ticker or goal; filter by wealth and sector exposure. *"Tech fell 30%, who do I call first?"* is one click, ranked by each family's own exposure.
 2. **A personal message, ready to approve.** Each family's page opens with a proposed message written from *their* plan. The tone follows their situation: supportive when things are hard, steady when there is bad news under a good score, celebratory when all is well. Each message has its reasons, the family's real figures and one small next step. The advisor edits, rewrites it with AI or approves it in seconds.
 3. **Sent on WhatsApp, followed by an AI advisor.** One click sends the approved message. When the family replies, an AI "senior advisor" answers in their language with their own numbers. It follows strict rules: calm first, no judgment, a traffic light for purchases, the right protocol for market drops and tax changes, and never an invented figure.
+4. **Voice notes, answered by voice.** When a family sends a WhatsApp voice note, the voice API transcribes it and checks whether their case data can answer it. If it can, they get a spoken answer back as a voice note. If it needs outside news or the advisor, the AI advisor replies in text instead.
 
 <p align="center">
   <img src="docs/images/clients.png" alt="Clients view: the four families with net worth, health score, sector exposure and next milestone" width="49%">
@@ -60,7 +61,11 @@ Every figure comes from their plan. When markets fall, the same advisor opens wi
  └────────────────────┘            │        │ approved message (localhost only) │
                                    │        ▼                                   │
                                    │ WhatsApp bot  apps/whatsapp-bot            │ ──▶ WhatsApp ──▶ family's test phone
-                                   │   sends, and answers replies with the AI   │ ◀──            (replies)
+                                   │   sends, and answers replies with the AI   │ ◀──            (replies, voice notes)
+                                   │        │ voice note (localhost only)       │
+                                   │        ▼                                   │
+                                   │ Voice API  apps/voice-api                  │ ──▶ AI proxy (scribe-v2, gpt-5-mini,
+                                   │   transcribe, answer from the case, speak  │     eleven-flash-v2.5) + MCP cases
                                    └───────────────────────────────────────────┘
  Data: cases/ (the four families' plans, personas, investments, legal values, signals)
 ```
@@ -76,8 +81,10 @@ Needs Node 22.6 or later.
 ```bash
 cp .env.example .env   # TEAM_KEY and LLM_PROXY_URL (password defaults to 1234)
 npm run setup          # once
-npm run serve          # builds the web app, starts the server and the WhatsApp bot
+npm run serve          # builds the web app, starts the server, the WhatsApp bot and the voice API
 ```
+
+Voice notes also need FFmpeg with the Opus encoder (`ffmpeg -encoders` must list `libopus`) and `MCP_TOKEN` in `.env`. Without them, everything else runs, and voice notes get a "please type it" reply.
 
 1. Scan the QR code in the terminal with the bot's WhatsApp (Settings, Linked devices).
 2. Publish the app: `cloudflared tunnel --url http://127.0.0.1:8787`, then open the `https://….trycloudflare.com` address on any device and log in with `APP_PASSWORD`. The demo password is `1234` by default, and the login page shows it. Set `APP_PASSWORD` to change it, or `SHOW_PASSWORD_ON_LOGIN=0` to hide it.
@@ -93,6 +100,7 @@ npm run serve          # builds the web app, starts the server and the WhatsApp 
 | Server | Node 22, no framework, no dependencies |
 | WhatsApp | [Baileys](https://github.com/WhiskeySockets/Baileys) (WhatsApp Web protocol) |
 | AI | `gpt-5-mini` through the hackathon AI proxy, low reasoning effort (about 10 s per reply) |
+| Voice | `scribe-v2` (speech to text), `gpt-5-mini`, `eleven-flash-v2.5` (text to speech), FFmpeg; case data through the MCP |
 | Data | The four Sherpas cases in [`cases/`](cases/); legal values and signals included |
 
 ## Repository
@@ -100,6 +108,7 @@ npm run serve          # builds the web app, starts the server and the WhatsApp 
 apps/web            advisor web app (Clients view, family pages, proposed messages)
 apps/api            server: web app + API, password, AI rewrite, WhatsApp hand-off
 apps/whatsapp-bot   WhatsApp bot: sends approved messages, AI advisor replies
+apps/voice-api      voice notes: transcribe, answer from the case, reply by voice
 cases/ legal/       the challenge data (unchanged)
 docs/               challenge brief, master prompt, specs, screenshots
 scripts/serve.mjs   runs everything on one machine

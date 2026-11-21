@@ -53,6 +53,27 @@ const env = {
   ALLOWED: [...new Set([...(process.env.ALLOWED || "89653264785495@lid").split(","), demoTo].map((s) => s.trim()).filter(Boolean))].join(","),
 };
 
+// Voice notes (apps/voice-api): optional. Needs its packages, FFmpeg with libopus and MCP_TOKEN.
+// Private to this machine (127.0.0.1); the bot calls it with a secret generated here.
+const voicePort = process.env.VOICE_API_PORT || "8790";
+let voiceOn = process.env.SERVE_VOICE !== "0";
+if (voiceOn && !fs.existsSync(path.join(root, "apps/voice-api/node_modules"))) {
+  console.warn("⚠ Voice notes off: run npm run setup to install apps/voice-api.");
+  voiceOn = false;
+}
+if (voiceOn && !process.env.MCP_TOKEN) {
+  console.warn("⚠ Voice notes off: MCP_TOKEN is not set in .env (the voice API reads the cases through the MCP).");
+  voiceOn = false;
+}
+if (voiceOn) {
+  env.VOICE_API_SECRET = process.env.VOICE_API_SECRET && process.env.VOICE_API_SECRET.length >= 32
+    ? process.env.VOICE_API_SECRET
+    : randomBytes(32).toString("base64url");
+  env.VOICE_API_URL = `http://127.0.0.1:${voicePort}`;
+} else {
+  delete env.VOICE_API_SECRET; // the bot then answers voice notes with a "please type it" message
+}
+
 if (process.env.SERVE_BUILD !== "0") {
   if (!fs.existsSync(path.join(root, "apps/web/node_modules"))) fail("Install first: npm run setup");
   console.log("▶ Building the web app…");
@@ -60,11 +81,16 @@ if (process.env.SERVE_BUILD !== "0") {
   const b = spawnSync(`${npm} --prefix apps/web run build`, { cwd: root, stdio: "inherit", env, shell: true });
   if (b.status !== 0) fail("Web build failed (see above).");
 }
+if (voiceOn) {
+  console.log("▶ Building the voice API…");
+  const b = spawnSync(`${npm} --prefix apps/voice-api run build`, { cwd: root, stdio: "inherit", env, shell: true });
+  if (b.status !== 0) { console.warn("⚠ Voice API build failed: voice notes off."); voiceOn = false; delete env.VOICE_API_SECRET; }
+}
 
 let stopping = false;
 const children = new Set();
-function run(name, args, cwd, onExit) {
-  const child = spawn(process.execPath, args, { cwd: path.join(root, cwd), stdio: "inherit", env });
+function run(name, args, cwd, onExit, extraEnv = {}) {
+  const child = spawn(process.execPath, args, { cwd: path.join(root, cwd), stdio: "inherit", env: { ...env, ...extraEnv } });
   children.add(child);
   child.on("exit", (code) => { children.delete(child); if (!stopping) onExit(code); });
   return child;
@@ -94,6 +120,14 @@ function startBot() {
 if (process.env.SERVE_BOT !== "0") {
   if (!fs.existsSync(path.join(root, "apps/whatsapp-bot/node_modules"))) fail("Install first: npm run setup");
   startBot();
+}
+
+// The voice API: if it stops, voice notes get a "please type it" reply; the rest keeps running.
+if (voiceOn) {
+  run("voice API", ["dist/src/main.js"], "apps/voice-api", (code) => {
+    console.error(`\n■ Voice API stopped (code ${code}). Voice notes now get a "please type it" reply; text keeps working.` +
+      " Check FFmpeg (ffmpeg -encoders | grep libopus) and MCP_TOKEN.");
+  }, { API_HOST: "127.0.0.1", API_PORT: voicePort });
 }
 
 for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, () => stopAll(0));

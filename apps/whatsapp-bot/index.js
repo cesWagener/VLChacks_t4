@@ -13,7 +13,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { responder } from "./ai.js";
 import { iniciarOutbox } from "./outbox.js"; // envíos aprobados desde la web (ver outbox.js)
-import { estaRegistrado } from "./contexto.js"; // teléfonos registrados desde la web, uno por familia
+import { buscarContexto, estaRegistrado } from "./contexto.js"; // teléfonos registrados desde la web, uno por familia
+import { preguntarPorVoz, vozActiva } from "./voice.js"; // notas de voz -> apps/voice-api
 
 // ─────────────────────────── Configuración ───────────────────────────
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,6 +33,7 @@ const ALLOWED = (process.env.ALLOWED || "89653264785495@lid")
 
 const NO_ENTIENDO = "I don't understand these messages yet, we are working on it 🛠️";
 const ERROR_IA = "I can't talk to you right now, will check in a bit 🙏";
+const NO_ENTIENDO_AUDIO = "I couldn't listen to that voice note just now. Could you type your question? 🙏";
 
 // Tipos internos de WhatsApp que NO son mensajes del usuario: se ignoran
 const IGNORAR = new Set([
@@ -61,7 +63,32 @@ async function guardarAudio(sock, m) {
   );
   const archivo = path.join(AUDIO_DIR, `${Date.now()}_${m.key.id}.ogg`);
   fs.writeFileSync(archivo, buffer);
-  return archivo;
+  return { archivo, buffer };
+}
+
+// Nota de voz de una familia: la API de voz (apps/voice-api) contesta con otra nota de voz,
+// o devuelve la transcripción y la IA contesta por texto. Devuelve false si no hay familia o voz.
+async function responderNotaDeVoz(sock, jid, alt, audio) {
+  if (!vozActiva()) return false;
+  const { ctx } = buscarContexto(jid, alt);
+  if (!ctx?.clientId) return false;
+  await sock.sendPresenceUpdate("recording", jid);
+  try {
+    const r = await preguntarPorVoz(ctx.clientId, audio);
+    if (r.audio) {
+      await sock.sendMessage(jid, { audio: r.audio, mimetype: "audio/ogg; codecs=opus", ptt: true });
+      console.log("VOZ: respuesta en audio para", ctx.clientId);
+    } else {
+      console.log("VOZ: transcripción ->", r.text);
+      await sock.sendPresenceUpdate("composing", jid);
+      const respuesta = await responderConIA(jid, r.text, alt);
+      await sock.sendMessage(jid, { text: respuesta });
+    }
+  } catch (err) {
+    console.error("ERROR VOZ:", err?.code ?? "", err?.message ?? err);
+    await sock.sendMessage(jid, { text: NO_ENTIENDO_AUDIO });
+  }
+  return true;
 }
 
 async function responderConIA(jid, text, alt) {
@@ -164,9 +191,11 @@ async function start() {
       console.log("JID:", jid, "| tipo:", tipo, "| texto:", text);
 
       // Guarda los audios recibidos (.ogg) en la carpeta "recibidos"
+      let notaDeVoz = null;
       if (tipo === "audioMessage") {
         try {
-          const archivo = await guardarAudio(sock, m);
+          const { archivo, buffer } = await guardarAudio(sock, m);
+          notaDeVoz = buffer;
           console.log("AUDIO GUARDADO:", archivo);
         } catch (err) {
           console.error("ERROR AL GUARDAR AUDIO:", err);
@@ -174,7 +203,9 @@ async function start() {
       }
 
       try {
-        if (!text) {
+        if (notaDeVoz && (await responderNotaDeVoz(sock, jid, alt, notaDeVoz))) {
+          // contestada por la API de voz (audio) o por la IA (texto a partir de la transcripción)
+        } else if (!text) {
           // Imagen, audio, sticker, vídeo, documento, ubicación, contacto...
           await sock.sendPresenceUpdate("composing", jid);
           await sleep(1000 + Math.random() * 1000);

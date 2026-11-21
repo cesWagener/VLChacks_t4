@@ -150,3 +150,7 @@ The automated suite checks the protocol and media handling against mocks. Run th
 ## Add it to the existing repository
 
 Extract `Sherpas-Voice-API.zip` into the repository root. The archive creates `apps/voice-api/` with its own package, lockfile, code, tests and example environment configuration. Run the install and start commands from that directory. The module is a standalone HTTP service and the ZIP contains only its files.
+
+## Inside this repository
+
+`npm run serve`, run from the repository root, builds and starts this service alongside the web app server and the WhatsApp bot. It binds to `127.0.0.1:8790` with a `VOICE_API_SECRET` that the launcher generates and shares only with the bot. Its credentials (`TEAM_KEY`, `MCP_TOKEN`, `LLM_PROXY_URL`) come from the root `.env`. When a family's phone sends a WhatsApp voice note, the bot (`apps/whatsapp-bot/voice.js`) posts it here with that family's `caseId`. A `success: true` answer goes back as a voice note. A `success: false` transcript is answered in text by the bot's AI advisor. Set `SERVE_VOICE=0` to run without it.
