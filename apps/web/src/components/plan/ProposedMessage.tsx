@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { PlanData } from "../../lib/plan.ts";
 import { TONES, draftMessage, type Tone } from "../../lib/message.ts";
 import { rewriteWithAI, sendViaWhatsApp } from "../../lib/api.ts";
+import { FamilyPhone } from "./FamilyPhone.tsx";
 
 const STORAGE_PREFIX = "sherpas.proposedMessage.v1.";
 
@@ -143,6 +144,7 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
             <span className="field__label">Message</span>
             <textarea ref={bodyRef} className="field__textarea" value={body} onChange={e => onEdit(() => setBody(e.target.value))} spellCheck />
           </label>
+          <FamilyPhone clientId={plan.id} familyName={plan.displayName} />
           <div className="proposal__actions">
             {approved ? (
               <button type="button" className="button button--approved" onClick={() => setApproved(false)}>✓ Approved · undo</button>
@@ -168,9 +170,9 @@ export function ProposedMessage({ plan }: { plan: PlanData }) {
           </div>
           {ai.status === "error" && <p className="proposal__error" role="alert">{ai.message} The standard draft is still here.</p>}
           {sending.status === "error" && <p className="proposal__error" role="alert">{sending.message}</p>}
-          {sentAt && <p className="proposal__sent" role="status">Sent on WhatsApp at {new Date(sentAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} to the team's demo phone.</p>}
+          {sentAt && <p className="proposal__sent" role="status">Sent on WhatsApp at {new Date(sentAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} to {plan.displayName}'s test phone.</p>}
           <p className="proposal__note">
-            Approve it to send it on WhatsApp. The families are fictional, so it goes to the team's demo phone, never to a real client.
+            Approve it to send it on WhatsApp. The families are fictional, so it goes to the test phone set for this family, never to a real client.
             {aiWritten && " AI drafts use only facts from the plan, but read them before approving."}
           </p>
         </div>

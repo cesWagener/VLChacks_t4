@@ -50,3 +50,24 @@ export async function sendViaWhatsApp(input: { clientId: string; subject: string
   if (!res.ok) throw new Error(data?.error ?? `Sending failed (HTTP ${res.status}).`);
   return data as SendResult;
 }
+
+/** Test phone per family (one phone plays one family in the demo). Shared by every device via the server. */
+export async function getPhones(): Promise<Record<string, string>> {
+  const res = await fetch("/api/phones", { signal: AbortSignal.timeout(10_000) });
+  checkSession(res);
+  if (!res.ok) throw new Error(`Could not load the phones (HTTP ${res.status}).`);
+  return res.json();
+}
+
+export async function savePhone(clientId: string, phone: string): Promise<{ phone: string; registered: boolean }> {
+  const res = await fetch(`/api/phones/${encodeURIComponent(clientId)}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone }),
+    signal: AbortSignal.timeout(15_000),
+  });
+  checkSession(res);
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.error ?? `Saving failed (HTTP ${res.status}).`);
+  return data;
+}

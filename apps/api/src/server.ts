@@ -8,6 +8,8 @@
 //   GET  /api/whatsapp/status    bot reachable / logged in                  (password)
 //   POST /api/messages/rewrite   { clientId, tone?, issueKeys? }            (password)
 //   POST /api/messages/send      { clientId, subject, body }                (password)
+//   GET  /api/phones             { clientId: phone } test phone per family  (password)
+//   PUT  /api/phones/:clientId   { phone }  ("" clears it)                   (password)
 // Web app: when apps/web/dist exists (npm run web:build), it is served from here too, with index.html
 // as the fallback for app routes such as /clients/michael-carter. Same origin, so the app's relative
 // /api calls work unchanged.
@@ -19,7 +21,9 @@ import { extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LlmError, MODEL, llmConfigured } from "./llm.ts";
 import { rewriteMessage } from "./rewrite.ts";
-import { sendApprovedMessage, whatsappStatus } from "./whatsapp.ts";
+import { maskRecipient, registerPhone, sendApprovedMessage, whatsappStatus } from "./whatsapp.ts";
+import { allPhones, setPhone } from "./phones.ts";
+import { loadPlan } from "./rewrite.ts";
 import { authRequired, isAuthenticated, login, logoutCookie } from "./auth.ts";
 
 const PORT = Number(process.env.PORT ?? process.env.API_PORT ?? 8787);
@@ -103,6 +107,21 @@ const server = createServer(async (req, res) => {
     if (!isAuthenticated(req)) return send(res, 401, { error: "Please log in." });
 
     if (req.method === "GET" && path === "/api/whatsapp/status") return send(res, 200, await whatsappStatus());
+
+    // Test phone per family: GET all, PUT one ({ phone: "" } clears it)
+    if (req.method === "GET" && path === "/api/phones") return send(res, 200, allPhones());
+    const phoneRoute = path.match(/^\/api\/phones\/([a-z0-9-]{1,80})$/);
+    if (req.method === "PUT" && phoneRoute) {
+      requireJson(req);
+      const clientId = phoneRoute[1];
+      const plan = loadPlan(clientId);
+      if (!plan) throw new LlmError("Unknown client.", 404);
+      const body = await readJson(req);
+      const phone = setPhone(clientId, body.phone, id => loadPlan(id)?.displayName ?? id);
+      const { registered } = await registerPhone(clientId, phone);
+      console.log(`phone for ${clientId}: ${phone ? maskRecipient(phone) : "cleared"}${phone ? ` (bot ${registered ? "registered" : "not reachable, will register on send"})` : ""}`);
+      return send(res, 200, { clientId, phone, registered });
+    }
     if (req.method === "POST" && path === "/api/messages/send") {
       requireJson(req);
       const body = await readJson(req);

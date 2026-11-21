@@ -12,7 +12,7 @@ import http from "node:http";
 import crypto from "node:crypto";
 import os from "node:os";
 import "./env.js"; // OUTBOX_SECRET, OUTBOX_ALLOWED... from the repo-root .env
-import { guardarContexto } from "./contexto.js";
+import { estaRegistrado, guardarContexto, registrarTelefono } from "./contexto.js";
 
 const MAX_TEXT = 4096;
 const MAX_PER_MINUTE = 10;
@@ -60,15 +60,32 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
         return responder(res, 200, { ok: true, connected: Boolean(getSock()?.user) });
       }
 
-      if (req.method === "POST" && req.url === "/send") {
+      const leerJson = async () => {
         let raw = "";
         for await (const chunk of req) {
           raw += chunk;
-          if (raw.length > 16 * 1024) return responder(res, 413, { error: "Demasiado grande" });
+          if (raw.length > 16 * 1024) throw Object.assign(new Error("Demasiado grande"), { status: 413 });
         }
-        const { to, text, clientId, subject } = JSON.parse(raw || "{}");
+        return JSON.parse(raw || "{}");
+      };
+      const familiaValida = (id) => typeof id === "string" && /^[a-z0-9-]{1,80}$/.test(id);
+
+      // The web app says which phone plays which family (one test phone per family).
+      if (req.method === "POST" && req.url === "/register") {
+        const { to, clientId } = await leerJson();
+        if (!to || !familiaValida(clientId)) return responder(res, 400, { error: "to y clientId son obligatorios" });
+        const jid = toJid(to);
+        registrarTelefono(jid, clientId);
+        console.log("OUTBOX REGISTRADO 📱", jid, "->", clientId);
+        return responder(res, 200, { ok: true, jid });
+      }
+
+      if (req.method === "POST" && req.url === "/send") {
+        const { to, text, clientId, subject } = await leerJson();
         const jid = toJid(to ?? "");
-        if (!permitidos.has(jid)) {
+        // Allowed: the env list (OUTBOX_ALLOWED / ALLOWED), a phone registered for a family, or a family send.
+        // Only the server can call the outbox (secret), and it sends only to phones an admin set for a family.
+        if (!permitidos.has(jid) && !estaRegistrado(jid) && !familiaValida(clientId)) {
           console.error(`OUTBOX: destinatario ${jid} no permitido. Permitidos: ${[...permitidos].join(", ")}`);
           return responder(res, 403, { error: `Recipient ${jid} is not in the bot's allowed list (${[...permitidos].join(", ")}).` });
         }
@@ -89,7 +106,7 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
           return responder(res, 502, { error: `WhatsApp could not deliver to ${jid}: ${err?.message ?? err}` });
         }
         // Remember which family this chat is about, so ai.js can answer the reply with their plan.
-        if (typeof clientId === "string" && /^[a-z0-9-]{1,80}$/.test(clientId)) {
+        if (familiaValida(clientId)) {
           guardarContexto(jid, { clientId, subject: typeof subject === "string" ? subject : "", text, at: new Date().toISOString() });
         }
         console.log("OUTBOX ENVIADO ✅", jid, clientId ?? "");
@@ -98,6 +115,7 @@ export function iniciarOutbox({ getSock, enviar, allowed }) {
 
       responder(res, 404, { error: "No encontrado" });
     } catch (err) {
+      if (err?.status) return responder(res, err.status, { error: err.message });
       console.error("ERROR OUTBOX:", err);
       responder(res, 500, { error: `Outbox error: ${err?.message ?? err}` });
     }

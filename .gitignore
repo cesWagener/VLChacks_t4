@@ -37,3 +37,7 @@ apps/whatsapp-bot/recibidos/
 apps/whatsapp-bot/contexto.json
 # Old bot folder, merged into apps/whatsapp-bot
 wabot/
+
+# Test phone per family (set from the web app)
+apps/api/data/
+

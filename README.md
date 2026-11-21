@@ -17,16 +17,18 @@
 One machine (e.g. Ches's laptop) runs the web app, the API and the WhatsApp bot. Any phone or laptop then opens one address. Needs Node 22 or later.
 
 ```bash
-cp .env.example .env   # fill in TEAM_KEY, LLM_PROXY_URL, WHATSAPP_DEMO_TO and APP_PASSWORD
+cp .env.example .env   # fill in TEAM_KEY, LLM_PROXY_URL and APP_PASSWORD (WHATSAPP_DEMO_TO optional)
 npm run setup          # once: installs the web app and the bot
 npm run serve          # builds the web app, starts the server (port 8787) and the bot
 ```
 
 1. On the first run, scan the QR code shown in the terminal from WhatsApp (Settings, Linked devices). The login is saved in `apps/whatsapp-bot/auth/` (git-ignored).
 2. In a second terminal, publish the app: `cloudflared tunnel --url http://127.0.0.1:8787`. It prints `https://<random>.trycloudflare.com`.
-3. Anyone on the team opens that address on any device and logs in with `APP_PASSWORD`. They approve a message and click **Send via WhatsApp**. The message goes to `WHATSAPP_DEMO_TO`, and the bot answers the client's replies with the AI.
+3. Anyone on the team opens that address on any device and logs in with `APP_PASSWORD`.
+4. **One test phone per family.** On a family's page, enter **"WhatsApp number for this family"**, with the country code, e.g. `+34 611 222 333`. That phone plays the family: approved messages go there, and when it writes to the bot, the AI answers with that family's plan. Use a different phone for each family you demo. One number can't play two families. Numbers are saved on the server (`apps/api/data/phones.json`, git-ignored), so every device sees them. Families without a number fall back to `WHATSAPP_DEMO_TO`.
+5. Approve a message and click **Send via WhatsApp**.
 
-The bot's outbox listens only on `127.0.0.1` and is never exposed. Only the app's address is public, behind the password. The tunnel address changes when the tunnel restarts. The families are fictional, so messages go only to the team's demo phone.
+The bot's outbox listens only on `127.0.0.1` and is never exposed. Only the app's address is public, behind the password. The tunnel address changes when the tunnel restarts. The families are fictional, so use only the team's own phones as test phones. Anyone with the password can set a family's number, and the bot can be banned for messaging many unknown numbers.
 
 ### Develop locally
 

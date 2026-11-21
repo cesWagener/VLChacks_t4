@@ -29,16 +29,18 @@ function paraWhatsApp(text) {
     .trim();
 }
 
-export async function responder({ jid, text, history }) {
-  // Which family is this chat about? Its own link, else the latest message sent from the app
-  // (WhatsApp may reply from a different JID), else BOT_DEFAULT_CLIENT if set.
-  let { ctx, via } = buscarContexto(jid);
+export async function responder({ jid, alt, text, history }) {
+  // Which family is this chat about? The phone registered for it (by its JID or its alternate JID),
+  // else the only family in play, else BOT_DEFAULT_CLIENT if set.
+  let { ctx, via } = buscarContexto(jid, alt);
   if (!ctx && caseExists(process.env.BOT_DEFAULT_CLIENT)) {
     ctx = { clientId: process.env.BOT_DEFAULT_CLIENT, text: "" };
     via = "BOT_DEFAULT_CLIENT";
   }
   if (!caseExists(ctx?.clientId)) {
-    console.log(`IA: sin familia para ${jid}: no se ha enviado ningún mensaje desde la web todavía (o pon BOT_DEFAULT_CLIENT en .env).`);
+    console.log(via === "ambiguous"
+      ? `IA: ${jid}${alt ? ` (${alt})` : ""} no es el teléfono de ninguna familia. Ponlo en "WhatsApp number for this family" en la web.`
+      : `IA: sin familia para ${jid}: no hay teléfonos registrados desde la web (o pon BOT_DEFAULT_CLIENT en .env).`);
     return SIN_CONTEXTO;
   }
   console.log(`IA: ${jid} -> ${ctx.clientId} (${via})`);

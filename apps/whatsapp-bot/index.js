@@ -13,6 +13,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { responder } from "./ai.js";
 import { iniciarOutbox } from "./outbox.js"; // envíos aprobados desde la web (ver outbox.js)
+import { estaRegistrado } from "./contexto.js"; // teléfonos registrados desde la web, uno por familia
 
 // ─────────────────────────── Configuración ───────────────────────────
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -63,11 +64,11 @@ async function guardarAudio(sock, m) {
   return archivo;
 }
 
-async function responderConIA(jid, text) {
+async function responderConIA(jid, text, alt) {
   const h = historial.get(jid) || [];
   try {
     const respuesta = await Promise.race([
-      responder({ jid, text, history: [...h] }),
+      responder({ jid, alt, text, history: [...h] }),
       new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), TIMEOUT_IA_MS)),
     ]);
     h.push({ role: "user", content: text }, { role: "assistant", content: respuesta });
@@ -144,7 +145,10 @@ async function start() {
     for (const m of messages) {
       const jid = m.key.remoteJid;
       if (!m.message || m.key.fromMe) continue;
-      if (!ALLOWED.includes(jid)) continue;
+      // El mismo contacto puede llegar como "...@lid" o como número: Baileys da el otro en remoteJidAlt.
+      const alt = m.key.remoteJidAlt || null;
+      // Responde a ALLOWED y a los teléfonos registrados desde la web (un teléfono de prueba por familia).
+      if (!ALLOWED.includes(jid) && !(alt && ALLOWED.includes(alt)) && !estaRegistrado(jid, alt)) continue;
 
       // Evita atender dos veces el mismo mensaje
       if (procesados.has(m.key.id)) continue;
@@ -185,7 +189,7 @@ async function start() {
           });
         } else {
           await sock.sendPresenceUpdate("composing", jid);
-          const respuesta = await responderConIA(jid, text);
+          const respuesta = await responderConIA(jid, text, alt);
           await sock.sendMessage(jid, { text: respuesta });
         }
         await sock.sendPresenceUpdate("paused", jid);

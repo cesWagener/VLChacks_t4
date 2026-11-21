@@ -27,9 +27,10 @@ if (major < 22 || (major === 22 && minor < 6)) fail(`Node ${process.versions.nod
 try { process.loadEnvFile(path.join(root, ".env")); } catch { /* no .env: use the environment */ }
 if (!process.env.APP_PASSWORD) fail("Set APP_PASSWORD in .env (or the environment). Once the app is public, it is the only thing stopping strangers from sending WhatsApp messages and spending the AI budget.");
 if (!process.env.TEAM_KEY) console.warn("⚠ TEAM_KEY is not set: AI rewrite and AI replies on WhatsApp will not work.");
+// Each family can have its own test phone (set on its page in the app). WHATSAPP_DEMO_TO is the fallback.
 const demoTo = (process.env.WHATSAPP_DEMO_TO || "").trim();
-if (!demoTo) fail("Set WHATSAPP_DEMO_TO in .env: the team's demo phone that receives the messages (country code + number, e.g. 34600111222).");
-if (demoTo === "34600111222") fail("WHATSAPP_DEMO_TO is still the example value from .env.example. Put the team's demo phone (country code + number) in .env.");
+if (demoTo === "34600111222") fail("WHATSAPP_DEMO_TO is still the example value from .env.example. Put the team's demo phone (country code + number) in .env, or remove the line.");
+if (!demoTo) console.warn("⚠ WHATSAPP_DEMO_TO is not set: set a WhatsApp number on each family's page before sending.");
 
 const port = process.env.PORT || "8787";
 const outboxPort = process.env.OUTBOX_PORT || "8788";
@@ -42,10 +43,9 @@ const env = {
   OUTBOX_URL: `http://127.0.0.1:${outboxPort}`,
   OUTBOX_SECRET: process.env.OUTBOX_SECRET || randomBytes(24).toString("hex"),
   OUTBOX_FROM_ENV: "1",
-  // The server only ever sends to WHATSAPP_DEMO_TO, so that is exactly what the bot's outbox accepts.
-  // (Without this, the outbox falls back to the bot's ALLOWED list, which may name another chat.)
-  OUTBOX_ALLOWED: demoTo,
-  // The bot answers replies only from ALLOWED chats: make sure the demo phone is one of them.
+  // The fallback demo phone is always accepted by the outbox; family phones are registered from the app.
+  ...(demoTo ? { OUTBOX_ALLOWED: demoTo } : {}),
+  // The bot answers ALLOWED chats plus every phone registered for a family: keep the demo phone in ALLOWED.
   ALLOWED: [...new Set([...(process.env.ALLOWED || "89653264785495@lid").split(","), demoTo].map((s) => s.trim()).filter(Boolean))].join(","),
 };
 

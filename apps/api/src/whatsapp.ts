@@ -9,6 +9,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { LlmError as ApiError } from "./llm.ts";
 import { loadPlan } from "./rewrite.ts";
+import { phoneFor } from "./phones.ts";
 
 const ENV_FILE = fileURLToPath(new URL("../../../.env", import.meta.url));
 const KEYS = ["OUTBOX_URL", "OUTBOX_SECRET", "WHATSAPP_DEMO_TO"] as const;
@@ -68,11 +69,26 @@ export async function whatsappStatus() {
 
 export interface SendInput { clientId?: unknown; subject?: unknown; body?: unknown }
 
+/** Tells the bot that this phone plays this family, so it can chat even before anything is sent. */
+export async function registerPhone(clientId: string, phone: string) {
+  const c = config();
+  if (!c.secret || !phone) return { registered: false };
+  try {
+    const r = await outbox("/register", { method: "POST", body: JSON.stringify({ to: phone, clientId }) });
+    return { registered: r.ok };
+  } catch {
+    return { registered: false }; // bot offline: the phone is still saved and is registered on the next send
+  }
+}
+
 export async function sendApprovedMessage(input: SendInput) {
   const c = config();
-  if (!c.secret || !c.to) throw new ApiError("WhatsApp sending is not set up: add OUTBOX_SECRET and WHATSAPP_DEMO_TO to .env.", 500);
   const plan = loadPlan(String(input.clientId ?? ""));
   if (!plan) throw new ApiError("Unknown client.", 404);
+  // The family's own test phone first, else the team's demo phone.
+  const to = phoneFor(plan.id) || c.to;
+  if (!c.secret) throw new ApiError("WhatsApp sending is not set up: OUTBOX_SECRET is missing.", 500);
+  if (!to) throw new ApiError(`No WhatsApp number for ${plan.displayName}. Enter one in "WhatsApp number for this family" above the message.`, 400);
   const subject = typeof input.subject === "string" ? input.subject.trim() : "";
   const body = typeof input.body === "string" ? input.body.trim() : "";
   if (!body) throw new ApiError("The message is empty.", 400);
@@ -80,12 +96,11 @@ export async function sendApprovedMessage(input: SendInput) {
   const text = `${subject ? `*${subject}*\n\n` : ""}${body}`;
   if (text.length > 4000) throw new ApiError("The message is too long for WhatsApp (4,000 characters max).", 400);
 
-  const r = await outbox("/send", { method: "POST", body: JSON.stringify({ to: c.to, text, clientId: plan.id, subject }) });
+  const r = await outbox("/send", { method: "POST", body: JSON.stringify({ to, text, clientId: plan.id, subject }) });
   const j: any = await r.json().catch(() => ({}));
-  if (r.status === 401) throw new ApiError("The bot rejected the secret: OUTBOX_SECRET must be identical in your .env and in Ches's .env.", 502);
-  if (r.status === 503) throw new ApiError("The bot is running but not logged in to WhatsApp. Ches should check the bot's terminal (QR code).", 503);
-  if (r.status === 403) throw new ApiError(`${j.error ?? "Recipient not allowed."} Set WHATSAPP_DEMO_TO to the demo phone (e.g. 34600111222, country code + number) and restart npm run serve.`, 502);
-  if (r.status === 502) throw new ApiError(`${j.error ?? "WhatsApp could not deliver the message."} Check WHATSAPP_DEMO_TO: a phone number with country code (e.g. 34600111222) is the most reliable.`, 502);
+  if (r.status === 401) throw new ApiError("The bot rejected the secret: OUTBOX_SECRET must be identical for the server and the bot.", 502);
+  if (r.status === 503) throw new ApiError("The bot is running but not logged in to WhatsApp. Check the bot's terminal (QR code).", 503);
+  if (r.status === 502) throw new ApiError(`${j.error ?? "WhatsApp could not deliver the message."} Check the family's WhatsApp number: country code + number (e.g. 34611222333) is the most reliable.`, 502);
   if (!r.ok) throw new ApiError(`The WhatsApp bot refused the message: ${j.error ?? `HTTP ${r.status}`}`, r.status === 429 ? 429 : 502);
-  return { sent: true, to: maskRecipient(c.to), family: plan.displayName, at: new Date().toISOString() };
+  return { sent: true, to: maskRecipient(to), family: plan.displayName, at: new Date().toISOString() };
 }
