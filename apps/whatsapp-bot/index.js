@@ -41,6 +41,7 @@ const IGNORAR = new Set([
   "senderKeyDistributionMessage",
   "reactionMessage",
   "messageContextInfo",
+  "stickerMessage", // stickers: sin respuesta (ni "I don't understand…" ni llamada a la IA)
 ]);
 
 const MAX_HISTORIAL = 10; // mensajes recordados por contacto
