@@ -5,6 +5,7 @@
   "description": "Sherpas challenge, CDTM Valencia Hacks 2026: advisor web app and WhatsApp bot",
   "scripts": {
     "setup": "npm --prefix apps/web install && npm --prefix apps/whatsapp-bot install",
+    "serve": "node scripts/serve.mjs",
     "api": "npm --prefix apps/api start",
     "api:check": "npm --prefix apps/api run check",
     "web": "npm --prefix apps/web run dev",

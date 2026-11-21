@@ -1,6 +1,10 @@
-# API (backend)
+# Server (API + web app)
 
-The web app's backend. It keeps the keys and talks to the hackathon AI proxy (`https://llm-hackathon.sherpaswealth.com`, OpenAI-compatible). The browser never sees a key: the web app calls `/api/...`, and Vite forwards those calls here.
+The web app's server. It keeps the keys, talks to the hackathon AI proxy (`https://llm-hackathon.sherpaswealth.com`, OpenAI-compatible), hands approved messages to the WhatsApp bot, and, when `apps/web/dist` exists (`npm run web:build`), serves the web app too, with `index.html` for app routes. The browser never sees a key.
+
+**Password:** when `APP_PASSWORD` is set, the app shows a login page. `/api/messages/*` and `/api/whatsapp/*` answer 401 without a session. The session is an HttpOnly cookie that lasts 12 hours, and logins are limited to 10 attempts per 5 minutes per IP. `npm run serve` refuses to start without a password.
+
+**Address:** `HOST` and `PORT`, by default `127.0.0.1:8787`. A tunnel or hosting platform forwards to it.
 
 ## Run it
 

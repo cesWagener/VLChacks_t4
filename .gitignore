@@ -31,3 +31,9 @@ docs/keys_enviroment.txt
 # WhatsApp bot: which family each chat is about (local state)
 wabot/contexto.json
 
+
+# WhatsApp bot local state (login, received audio, chat->family links). Never commit.
+apps/whatsapp-bot/recibidos/
+apps/whatsapp-bot/contexto.json
+# Old bot folder, merged into apps/whatsapp-bot
+wabot/

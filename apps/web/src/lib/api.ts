@@ -1,6 +1,14 @@
 // api.ts — calls to the app's own backend (apps/api). The browser never holds an API key:
 // the backend reads the keys from .env and talks to the AI proxy. In dev, Vite forwards /api to it.
 import type { Tone } from "./message.ts";
+import { UNAUTHORIZED_EVENT } from "./session.ts";
+
+function checkSession(res: Response) {
+  if (res.status === 401) {
+    window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
+    throw new Error("Your session has ended. Please log in again.");
+  }
+}
 
 export interface RewriteResult { subject: string; body: string; tone: Tone; model: string }
 
@@ -16,6 +24,7 @@ export async function rewriteWithAI(input: { clientId: string; tone?: Tone; issu
   } catch {
     throw new Error("The AI service isn't reachable. Is the API running (npm run api)?");
   }
+  checkSession(res);
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new Error(data?.error ?? `The AI service answered ${res.status}.`);
   return data as RewriteResult;
@@ -36,6 +45,7 @@ export async function sendViaWhatsApp(input: { clientId: string; subject: string
   } catch {
     throw new Error("The API isn't reachable. Is it running (npm run api)?");
   }
+  checkSession(res);
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new Error(data?.error ?? `Sending failed (HTTP ${res.status}).`);
   return data as SendResult;

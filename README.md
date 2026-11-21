@@ -7,24 +7,37 @@
 | Part | Folder | What it is |
 |---|---|---|
 | **Web app** | [`apps/web`](apps/web) | The advisor's Clients menu (search, wealth and sector filters) and a page per family with a proposed message on top of their plan. React + TypeScript + Vite. |
-| **API** | [`apps/api`](apps/api) | Backend for the web app. Holds the keys and calls the AI proxy (e.g. "Rewrite with AI" on the proposed message). Node, no dependencies. |
-| **WhatsApp bot** | [`apps/whatsapp-bot`](apps/whatsapp-bot) | Talks to clients over WhatsApp. Node + Baileys. |
+| **Server (API)** | [`apps/api`](apps/api) | Serves the web app and the API. Holds the keys, calls the AI proxy ("Rewrite with AI") and hands approved messages to the bot. Password-protected. Node, no dependencies. |
+| **WhatsApp bot** | [`apps/whatsapp-bot`](apps/whatsapp-bot) | Sends the approved messages and answers the client's replies with the AI, using that family's plan. Node + Baileys. |
 | **Docs** | [`docs`](docs) | Specs, e.g. [`client-menu-frontend-spec.md`](docs/client-menu-frontend-spec.md). |
 | **Challenge data** | [`cases`](cases), [`legal`](legal), [`assets`](assets) | Supplied by Sherpas, unchanged. The web app builds its data from `cases/`. |
 
-Run from the repo root (Node 22 or later):
+### Run everything on one machine, open it from any device
+
+One machine (e.g. Ches's laptop) runs the web app, the API and the WhatsApp bot. Any phone or laptop then opens one address. Needs Node 22 or later.
 
 ```bash
-cp .env.example .env   # then fill in the keys (from your access page)
-npm run setup      # installs the web app and the bot
-npm run api        # backend at http://127.0.0.1:8787 (AI features)
-npm run web        # web app at http://localhost:5173/clients
-npm run bot        # WhatsApp bot (scan the QR on first run)
+cp .env.example .env   # fill in TEAM_KEY, LLM_PROXY_URL, WHATSAPP_DEMO_TO and APP_PASSWORD
+npm run setup          # once: installs the web app and the bot
+npm run serve          # builds the web app, starts the server (port 8787) and the bot
 ```
 
-**Sending on WhatsApp:** approve a proposed message in the web app, then click **Send via WhatsApp**. It goes web app, then API, then the bot (`wabot/outbox.js`), then WhatsApp, and only to the team's demo phone (`WHATSAPP_DEMO_TO`). The API and the bot need the same `OUTBOX_SECRET` in their `.env`. The bot runs on a teammate's laptop and opens a tunnel (`cloudflared tunnel --url http://localhost:8788`); `OUTBOX_URL` holds that https address. Details in [`apps/api`](apps/api#sending-on-whatsapp).
+1. On the first run, scan the QR code shown in the terminal from WhatsApp (Settings, Linked devices). The login is saved in `apps/whatsapp-bot/auth/` (git-ignored).
+2. In a second terminal, publish the app: `cloudflared tunnel --url http://localhost:8787`. It prints `https://<random>.trycloudflare.com`.
+3. Anyone on the team opens that address on any device and logs in with `APP_PASSWORD`. They approve a message and click **Send via WhatsApp**. The message goes to `WHATSAPP_DEMO_TO`, and the bot answers the client's replies with the AI.
 
-Secrets stay local and git-ignored: `.env` (AI and MCP keys) and the WhatsApp login (`apps/whatsapp-bot/auth/`). Keys are only read by the backend, never by browser code. Each app's README has the details.
+The bot's outbox listens only on `127.0.0.1` and is never exposed. Only the app's address is public, behind the password. The tunnel address changes when the tunnel restarts. The families are fictional, so messages go only to the team's demo phone.
+
+### Develop locally
+
+```bash
+npm run api        # API at http://127.0.0.1:8787
+npm run web        # web app with hot reload at http://localhost:5173/clients (forwards /api to the API)
+npm run bot        # WhatsApp bot on its own
+npm run api:check  # checks the keys, the AI proxy, the MCP server, the API and the bot
+```
+
+Secrets stay local and git-ignored: `.env` (keys and password) and the WhatsApp bot's state (`auth/`, `recibidos/`, `contexto.json`). Keys are only read on the server, never by browser code. Baileys is unofficial (WhatsApp Web protocol), so WhatsApp can ban the number. That's fine for a demo; a real product would use the official WhatsApp Business Cloud API.
 
 ---
 

@@ -13,10 +13,11 @@ import { loadPlan } from "./rewrite.ts";
 const ENV_FILE = fileURLToPath(new URL("../../../.env", import.meta.url));
 const KEYS = ["OUTBOX_URL", "OUTBOX_SECRET", "WHATSAPP_DEMO_TO"] as const;
 
-/** Reads the WhatsApp settings fresh from .env on every call, so a new OUTBOX_URL works without a restart. */
+/** Reads the WhatsApp settings fresh from .env on every call, so a new OUTBOX_URL works without a restart.
+ *  Under `npm run serve` (OUTBOX_FROM_ENV=1) the launcher's values win: the bot runs next to the API. */
 function config() {
   const fromFile: Record<string, string> = {};
-  try {
+  if (!process.env.OUTBOX_FROM_ENV) try {
     for (const line of readFileSync(ENV_FILE, "utf8").split(/\r?\n/)) {
       const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.*?)\s*$/);
       if (m && (KEYS as readonly string[]).includes(m[1])) fromFile[m[1]] = m[2].replace(/^["']|["']$/g, "");

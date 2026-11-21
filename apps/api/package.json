@@ -6,8 +6,8 @@
   "description": "Backend for the advisor web app. Holds the keys and calls the hackathon AI proxy.",
   "engines": { "node": ">=22.6" },
   "scripts": {
-    "start": "node --env-file=../../.env --experimental-strip-types src/server.ts",
-    "dev": "node --env-file=../../.env --experimental-strip-types --watch src/server.ts",
-    "check": "node --env-file=../../.env --experimental-strip-types scripts/check-connections.ts"
+    "start": "node --experimental-strip-types src/main.ts",
+    "dev": "node --experimental-strip-types --watch src/main.ts",
+    "check": "node --experimental-strip-types scripts/check-connections.ts"
   }
 }

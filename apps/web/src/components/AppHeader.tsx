@@ -1,10 +1,12 @@
-import type { MouseEvent } from "react";
+import { useContext, type MouseEvent } from "react";
+import { LogoutContext } from "../App.tsx";
 import { CLIENTS_PATH, navigate, withDataParam } from "../lib/router.ts";
 
 // The existing Sherpas nav from the video, plus the new "Clients" item. Only Clients is part of this build.
 const NAV = ["Opportunities", "Clients", "Contacts", "Portfolios", "Data Extraction"];
 
 export function AppHeader({ current = "Clients" }: { current?: string }) {
+  const logout = useContext(LogoutContext);
   const goClients = (e: MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
     e.preventDefault();
@@ -33,6 +35,7 @@ export function AppHeader({ current = "Clients" }: { current?: string }) {
             ),
           )}
         </nav>
+        {logout && <button type="button" className="link-button app-header__logout" onClick={logout}>Log out</button>}
         <span className="avatar" aria-label="Signed in as David">DV</span>
       </div>
     </header>

@@ -3,12 +3,14 @@
 // Checks: .env values, AI proxy (key + budget + one tiny model call), MCP case server, local API server.
 // The model call costs a fraction of a cent. Exit code 1 if a required check fails.
 
+try { process.loadEnvFile(new URL("../../../.env", import.meta.url)); } catch { /* no .env: use the environment */ }
+
 const PROXY = (process.env.LLM_PROXY_URL ?? "").replace(/\/+$/, "");
 const KEY = process.env.TEAM_KEY ?? "";
 const MCP_URL = process.env.MCP_URL ?? "";
 const MCP_TOKEN = process.env.MCP_TOKEN ?? "";
 const MODEL = process.env.LLM_MODEL ?? "gpt-5-mini";
-const API = `http://127.0.0.1:${process.env.API_PORT ?? 8787}`;
+const API = `http://127.0.0.1:${process.env.PORT ?? process.env.API_PORT ?? 8787}`;
 
 let failed = 0;
 const ok = (name: string, detail = "") => console.log(`  PASS  ${name}${detail ? `  (${detail})` : ""}`);
