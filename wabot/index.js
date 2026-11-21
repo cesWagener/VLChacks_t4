@@ -27,8 +27,8 @@ const ALLOWED = (process.env.ALLOWED || "89653264785495@lid")
   .map((s) => s.trim())
   .filter(Boolean);
 
-const NO_ENTIENDO = "No te entiendo todavía, pero estamos trabajando en ello 🛠️";
-const ERROR_IA = "Ahora mismo no puedo responder, prueba en un rato 🙏";
+const NO_ENTIENDO = "I don't understand these messages yet, we are working on it 🛠️";
+const ERROR_IA = "I can't talk to you right now, will check in a bit 🙏";
 
 // Tipos internos de WhatsApp que NO son mensajes del usuario: se ignoran
 const IGNORAR = new Set([
