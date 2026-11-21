@@ -2,6 +2,27 @@
   <img src="assets/banner.png" alt="First to know, first to tell. Sherpas challenge at CDTM Valencia Hacks 2026, Saturday 21 November, The Terminal Hub, Valencia" width="100%">
 </p>
 
+## Our project
+
+| Part | Folder | What it is |
+|---|---|---|
+| **Web app** | [`apps/web`](apps/web) | The advisor's Clients menu (search, wealth and sector filters) and a page per family with a proposed message on top of their plan. React + TypeScript + Vite. |
+| **WhatsApp bot** | [`apps/whatsapp-bot`](apps/whatsapp-bot) | Talks to clients over WhatsApp. Node + Baileys. |
+| **Docs** | [`docs`](docs) | Specs, e.g. [`client-menu-frontend-spec.md`](docs/client-menu-frontend-spec.md). |
+| **Challenge data** | [`cases`](cases), [`legal`](legal), [`assets`](assets) | Supplied by Sherpas, unchanged. The web app builds its data from `cases/`. |
+
+Run from the repo root (Node 22 or later):
+
+```bash
+npm run setup      # installs both apps
+npm run web        # web app at http://localhost:5173/clients
+npm run bot        # WhatsApp bot (scan the QR on first run)
+```
+
+The WhatsApp login (`apps/whatsapp-bot/auth/`) is local only and git-ignored. Each app's README has the details.
+
+---
+
 # First to know, first to tell
 
 **Sherpas challenge at CDTM Valencia Hacks 2026. Saturday 21 November 2026, The Terminal Hub, Valencia**

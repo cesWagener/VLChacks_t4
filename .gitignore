@@ -16,3 +16,10 @@ build/
 .DS_Store
 .idea/
 .vscode/
+
+# WhatsApp bot session (login credentials): local only, never commit
+apps/whatsapp-bot/auth/
+apps/whatsapp-bot/auth_backup/
+
+# Build caches
+.vite/

@@ -1,0 +1,13 @@
+{
+  "name": "vlchacks-t4",
+  "private": true,
+  "description": "Sherpas challenge, CDTM Valencia Hacks 2026: advisor web app and WhatsApp bot",
+  "scripts": {
+    "setup": "npm --prefix apps/web install && npm --prefix apps/whatsapp-bot install",
+    "web": "npm --prefix apps/web run dev",
+    "web:build": "npm --prefix apps/web run build",
+    "web:test": "npm --prefix apps/web test",
+    "web:data": "npm --prefix apps/web run data",
+    "bot": "npm --prefix apps/whatsapp-bot start"
+  }
+}
